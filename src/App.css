@@ -1,11 +1,8 @@
 /* styles.css */
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+ 
   height: 100vh;
-  /* background: linear-gradient(135deg, #282c34, #4e4376); */
+  background: linear-gradient(135deg, #282c34, #4e4376);
   color: #ffffff;
   font-family: Arial, sans-serif;
 }
