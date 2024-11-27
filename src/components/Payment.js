@@ -3,14 +3,14 @@ import axios from 'axios';
 import { API_URL } from '../service';
 import './CSS/payment.css'
 const Payment = () => {
-  const [amount, setAmount] = useState(500); 
+  const [name,setName]=useState('')
   const [upiId, setUpiId] = useState('success@razorpay'); 
-
+  const prize = localStorage.getItem("prizeAmount");
   const handlePayment = async () => {
     try {
       // Step 1: Create an order on the backend
       const { data } = await axios.post(`${API_URL}payments/upi/create-order`, {
-        amount,
+        amount:prize,
         currency: 'INR',
         upi_id: upiId,
       });
@@ -108,13 +108,13 @@ const Payment = () => {
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
               <label class="form-label" for="typeEmailX">Name</label>
-                <input type="text" value={amount} onChange={(e) => setAmount(e.target.value)}  id="typeEmailX" class="form-control form-control-lg" />
+                <input type="text" value={name} placeholder='John Doe' onChange={(e) => setName(e.target.value)}  id="typeEmailX" class="form-control form-control-lg" />
                
               </div>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
               <label class="form-label" for="typePasswordX">UPI Id</label>
-                <input type="text" value={upiId}
+                <input type="text" value={upiId} placeholder='john@upi.com'
           onChange={(e) => setUpiId(e.target.value)} id="typePasswordX" class="form-control form-control-lg" />
 
               </div>

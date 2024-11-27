@@ -47,6 +47,15 @@ function Spinner() {
     setResult(winner);
     setShowModal(true);
     setMustSpin(false);
+
+    // Save prize amount to localStorage if it's not "Better luck"
+    if (!winner.includes("Better luck")) {
+      const prizeAmount = winner.match(/\d+/)?.[0] || "0"; // Extract the number from the string
+      localStorage.setItem("prizeAmount", prizeAmount);
+      console.log(`Prize saved in localStorage: ${prizeAmount}`);
+    } else {
+      console.log("No prize won, not saving to localStorage.");
+    }
   };
 
   const closeModal = () => {
@@ -86,64 +95,49 @@ function Spinner() {
       </div>
 
       <Modal
-  isOpen={showModal}
-  onRequestClose={closeModal}
-  style={{
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      transform: "translate(-50%, -50%)",
-      width: "400px",
-      textAlign: "center",
-      padding: "20px",
-      borderRadius: "10px",
-      border: "none",
-      background: "#f8f8f8",
-      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-      zIndex: 9999, // Ensure this is above the spinner
-    },
-    overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.6)",
-      zIndex: 9998, // Slightly lower than content
-    },
-  }}
->
-  <img src={confettiGif} alt="Confetti" width={300} />
-  <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>{result}</h2>
-  {!result.includes("Better luck") && (
-    <button
-      onClick={redirectToForm}
-      style={{
-        marginTop: "20px",
-        background: "#34A24F",
-        color: "#fff",
-        border: "none",
-        padding: "10px 20px",
-        borderRadius: "5px",
-        cursor: "pointer",
-      }}
-    >
-      Claim Your Prize
-    </button>
-  )}
-  {/* <button
-    onClick={closeModal}
-    style={{
-      marginTop: "10px",
-      background: "#ccc",
-      color: "#000",
-      border: "none",
-      padding: "8px 15px",
-      borderRadius: "5px",
-      cursor: "pointer",
-    }}
-  >
-    Close
-  </button> */}
-</Modal>
-
+        isOpen={showModal}
+        onRequestClose={closeModal}
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            transform: "translate(-50%, -50%)",
+            width: "400px",
+            textAlign: "center",
+            padding: "20px",
+            borderRadius: "10px",
+            border: "none",
+            background: "#f8f8f8",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+            zIndex: 9999, // Ensure this is above the spinner
+          },
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: 9998, // Slightly lower than content
+          },
+        }}
+      >
+        <img src={confettiGif} alt="Confetti" width={300} />
+        <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>{result}</h2>
+        {!result.includes("Better luck") && (
+          <button
+            onClick={redirectToForm}
+            style={{
+              marginTop: "20px",
+              background: "#34A24F",
+              color: "#fff",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Claim Your Prize
+          </button>
+        )}
+      </Modal>
 
       {!showModal && <h2 className="text-center mt-5">Start Spin to see the magic happen!</h2>}
     </div>
