@@ -26,22 +26,61 @@ function Spinner() {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [result, setResult] = useState(""); // To store the result message
+  const [spinCount, setSpinCount] = useState(0); // Track the number of spins
   const [showModal, setShowModal] = useState(false); // Modal control
   const spinSound = useRef(new Audio(sound));
   const navigate = useNavigate();
 
-  const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * segments.length);
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
+  // const handleSpinClick = () => {
+  //   let newPrizeNumber;
 
+  //   // Determine the result based on spin count
+  //   if (spinCount < 2) {
+  //     // Force "Better luck" for the first two spins
+  //     newPrizeNumber = segments.findIndex((segment) => segment.option === "Better luck");
+  //   } else {
+  //     // Randomly determine a prize for subsequent spins
+  //     newPrizeNumber = Math.floor(Math.random() * segments.length);
+  //   }
+
+  //   setPrizeNumber(newPrizeNumber);
+  //   setMustSpin(true);
+  //   setSpinCount(spinCount + 1); // Increment spin count
+
+  //   if (spinSound.current) {
+  //     spinSound.current.play();
+  //   }
+
+  //   setResult("");
+  //   setShowModal(false);
+  // };
+
+  const handleSpinClick = () => {
+    // Reset the spin sound to start from the beginning
     if (spinSound.current) {
+      spinSound.current.currentTime = 0; // Reset the audio to the beginning
       spinSound.current.play();
     }
-
+  
+    let newPrizeNumber;
+  
+    // Determine the result based on spin count
+    if (spinCount < 2) {
+      // Force "Better luck" for the first two spins
+      newPrizeNumber = segments.findIndex((segment) => segment.option === "Better luck");
+    } else {
+      // Randomly determine a prize for subsequent spins
+      newPrizeNumber = Math.floor(Math.random() * segments.length);
+    }
+  
+    setPrizeNumber(newPrizeNumber);
+    setMustSpin(true);
+    setSpinCount(spinCount + 1); // Increment spin count
+  
     setResult("");
     setShowModal(false);
   };
+  
 
   const onFinished = (winner) => {
     setResult(winner);
