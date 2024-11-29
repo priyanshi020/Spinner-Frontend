@@ -3,25 +3,55 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
+  Navigate,
 } from "react-router-dom";
 import "./App.css";
 import Spinner from "./components/Spinner";
 import Payment from "./components/Payment";
 import Login from "./components/Login";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import QA from "./components/QA";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// ProtectedRoute Component
+const ProtectedRoute = ({ element, isLoggedIn }) => {
+  return isLoggedIn ? element : <Navigate to="/" replace />;
+};
 
 function App() {
+  // Simulating authentication state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Simulating login/logout functionality
+  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogout = () => setIsLoggedIn(false);
+
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route  path='/' element={<Login/>}/>
-          <Route path="/spinner" element={<Spinner />} />
-          <Route path="/payment" element={<Payment/>}/>
-          <Route path="/Q&A" element={<QA/>}/>
+          {/* Public Route */}
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
+          
+          {/* Protected Routes */}
+          <Route
+            path="/spinner"
+            element={<ProtectedRoute element={<Spinner />} isLoggedIn={isLoggedIn} />}
+          />
+          <Route
+            path="/payment"
+            element={<ProtectedRoute element={<Payment />} isLoggedIn={isLoggedIn} />}
+          />
+          <Route
+            path="/Q&A"
+            element={<ProtectedRoute element={<QA />} isLoggedIn={isLoggedIn} />}
+          />
         </Routes>
+        {/* Logout Button for testing */}
+        {isLoggedIn && (
+          <button onClick={handleLogout} className="btn btn-danger" style={{ position: "fixed", bottom: 20, right: 20 }}>
+            Logout
+          </button>
+        )}
       </Router>
     </div>
   );

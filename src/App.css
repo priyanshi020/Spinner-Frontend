@@ -1,7 +1,9 @@
 /* styles.css */
 .App {
  
-  height: 100vh;
+  height: auto;
+  overflow: hidden;
+
   background: linear-gradient(135deg, #282c34, #4e4376);
   color: #ffffff;
   font-family: Arial, sans-serif;

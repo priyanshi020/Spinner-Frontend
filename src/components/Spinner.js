@@ -7,7 +7,9 @@ import Navbar from "./Navbar";
 import logo from "../Images/tufcon-logo.png";
 import confettiGif from "../Images/confetti.gif"; // Replace with a spinning confetti GIF
 import { useNavigate } from "react-router-dom";
-
+import betterLuckMp4 from '../Images/oops.mp4'
+import image1 from '../Images/Tiger.png';
+import image2 from '../Images/TMT.png'
 const segments = [
   { option: "Better luck" },
   { option: "Won 70 Rs." },
@@ -108,7 +110,7 @@ function Spinner() {
   return (
     <div className="App">
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} height={120} width={120} alt="Logo" />
+        <img src={logo} height={170} width={150} alt="Logo" />
       </div>
 
       <div className="wheel-container pt-3">
@@ -134,51 +136,91 @@ function Spinner() {
       </div>
 
       <Modal
-        isOpen={showModal}
-        onRequestClose={closeModal}
+  isOpen={showModal}
+  onRequestClose={closeModal}
+  style={{
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%)",
+      width: "400px",
+      textAlign: "center",
+      padding: "20px",
+      borderRadius: "10px",
+      border: "none",
+      background: "#f8f8f8",
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+      zIndex: 9999, // Ensure this is above the spinner
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      zIndex: 9998, // Slightly lower than content
+    },
+  }}
+>
+  {result.includes("Better luck") ? (
+    <video
+      src={betterLuckMp4}
+      autoPlay
+      loop
+      muted
+      width={300}
+      style={{ borderRadius: "10px" }}
+    ></video>
+  ) : (
+    <img
+      src={confettiGif}
+      alt="Confetti"
+      width={300}
+      style={{ borderRadius: "10px" }}
+    />
+  )}
+  <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>{result}</h2>
+  {!result.includes("Better luck") && (
+    <button
+      onClick={redirectToForm}
+      style={{
+        marginTop: "20px",
+        background: "#34A24F",
+        color: "#fff",
+        border: "none",
+        padding: "10px 20px",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+    >
+      Claim Your Prize
+    </button>
+  )}
+</Modal>
+
+
+
+    <div>
+      <h2 className="text-center mt-5">Start Spin to see the magic happen!</h2>
+      <div
         style={{
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            transform: "translate(-50%, -50%)",
-            width: "400px",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "10px",
-            border: "none",
-            background: "#f8f8f8",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-            zIndex: 9999, // Ensure this is above the spinner
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            zIndex: 9998, // Slightly lower than content
-          },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "20px",
         }}
       >
-        <img src={confettiGif} alt="Confetti" width={300} />
-        <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>{result}</h2>
-        {!result.includes("Better luck") && (
-          <button
-            onClick={redirectToForm}
-            style={{
-              marginTop: "20px",
-              background: "#34A24F",
-              color: "#fff",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Claim Your Prize
-          </button>
-        )}
-      </Modal>
-
-      {!showModal && <h2 className="text-center mt-5">Start Spin to see the magic happen!</h2>}
+        <img
+          src={image1}
+          alt="First Image"
+          style={{ width: "200px", marginBottom: "-1px" }}
+        />
+        <img
+          src={image2}
+          alt="Second Image"
+          style={{ width: "200px", marginTop: "-42px" }}
+        />
+      </div>
+    </div>
+ 
     </div>
   );
 }

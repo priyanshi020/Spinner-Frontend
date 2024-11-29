@@ -27,4 +27,25 @@
     transform: translate(-50%, -50%) scale(1.05);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
   }
+
+  /* Target the arrow within the Wheel component */
+.wheel-container .arrow {
+  animation: none; /* No animation by default */
+}
+
+.wheel-container .arrow.arrow-animate {
+  animation: bounce 0.2s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+  
+  
   

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import tiger from "../Images/Tiger.png";
-import tufcon from '../Images/tufcon-logo.png';
+import tufcon from "../Images/tufcon-logo.png";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../service";
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [error, setError] = useState(null);
@@ -13,16 +13,26 @@ const Login = () => {
   const handleGo = async () => {
     try {
       const response = await axios.post(`${API_URL}users/login`, {
-        name:name,
+        name: name,
         mobile_number: mobile,
       });
       console.log("Login Successful:", response.data);
 
       // Navigate to another page or handle success logic
+      onLogin();
       navigate("/spinner");
     } catch (err) {
       console.error("Login Failed:", err.response?.data || err.message);
-      setError(err.response?.data?.message || "An error occurred. Please try again.");
+      setError(
+        err.response?.data?.message || "An error occurred. Please try again."
+      );
+    }
+  };
+  const handleMobileChange = (e) => {
+    const value = e.target.value;
+    // Allow only numbers and limit to 10 digits
+    if (/^\d{0,10}$/.test(value)) {
+      setMobile(value);
     }
   };
 
@@ -45,9 +55,19 @@ const Login = () => {
                   <div className="card-body p-4 p-lg-5 text-black">
                     <form onSubmit={(e) => e.preventDefault()}>
                       <div className="align-items-center mb-3 pb-1">
-                        <img src={tufcon} width={120} height={100} alt="Logo" />
+                        <img src={tufcon} width={170} height={150} alt="Logo" />
                         <br />
-                        <div className="h1 fw-bold mb-0">Play Now</div>
+                        <style>
+                          {`
+          @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+          .play-now {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: bold;
+          }
+        `}
+                        </style>
+                        <div className="h1 fw-bold mb-0 play-now">Play Now</div>
                       </div>
 
                       <div className="form-outline mb-4">
@@ -68,17 +88,34 @@ const Login = () => {
                         <label className="form-label" htmlFor="form2Example27">
                           Enter Your Mobile No.
                         </label>
-                        <input
-                          type="text"
-                          placeholder="9999999999"
-                          id="form2Example27"
-                          className="form-control form-control-lg"
-                          value={mobile}
-                          onChange={(e) => setMobile(e.target.value)}
-                        />
+                        <div>
+                          <style>
+                            {`
+          /* Remove default arrows on number input */
+          input[type="number"]::-webkit-outer-spin-button,
+          input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          input[type="number"] {
+            -moz-appearance: textfield; /* Firefox */
+          }
+        `}
+                          </style>
+                          <input
+                            type="number"
+                            placeholder="9999999999"
+                            id="form2Example27"
+                            className="form-control form-control-lg"
+                            value={mobile}
+                            onChange={handleMobileChange}
+                          />
+                        </div>
                       </div>
 
-                      {error && <div className="alert alert-danger">{error}</div>}
+                      {error && (
+                        <div className="alert alert-danger">{error}</div>
+                      )}
 
                       <div className="pt-1 mb-4">
                         <button
