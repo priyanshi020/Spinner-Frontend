@@ -67,7 +67,6 @@ function Spinner() {
       return;
     }
   
-    // Reset the spin sound to start from the beginning
     if (spinSound.current) {
       spinSound.current.currentTime = 0; // Reset the audio to the beginning
       spinSound.current.play();
