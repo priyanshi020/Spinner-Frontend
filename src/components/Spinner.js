@@ -123,7 +123,7 @@ function Spinner() {
   };
 
   return (
-    <div className="App">
+    <div className="App1">
       <div style={{ display: "flex", justifyContent: "center" }}>
         <img src={logo} height={170} width={150} alt="Logo" />
       </div>
@@ -232,12 +232,12 @@ function Spinner() {
           <img
             src={image1}
             alt="First Image"
-            style={{ width: "200px", marginBottom: "-1px" }}
+            style={{ width: "70%", marginBottom: "-1px" }}
           />
           <img
             src={image2}
             alt="Second Image"
-            style={{ width: "100%", marginTop: "-85px" }}
+            style={{ width: "70%", marginTop: "-20%" }}
           />
         </div>
       </div>
