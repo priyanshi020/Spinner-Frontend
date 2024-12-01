@@ -49,9 +49,9 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <section className="vh-100 App">
+    <section className=" App">
       <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-80">
+        <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
             <div className="d-flex row justify-content-center
             align-items-center mb-3 pb-1">

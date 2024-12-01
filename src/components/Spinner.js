@@ -58,42 +58,35 @@ function Spinner() {
   //   setShowModal(false);
   // };
 
+  const [hasSpun, setHasSpun] = useState(false);  // Track if the user has already spun
+
   const handleSpinClick = () => {
-    // Check if the user is allowed to spin
-    const hasSpun = localStorage.getItem("hasSpun");
-  
-    if (hasSpun === "true") {
-      alert("You can't spin again. Please log in to continue.");
-      localStorage.removeItem("hasSpun"); // Remove the flag before navigating
-      navigate('/'); // Redirect the user
+    // Prevent spin if user has already spun
+    if (hasSpun) {
+      alert("You can only spin once.");
+      navigate('/')
       return;
     }
   
+    // Randomly determine a prize (no need for spin count)
+    const newPrizeNumber = Math.floor(Math.random() * segments.length);
+  
+    // Update states
+    setPrizeNumber(newPrizeNumber);
+    setMustSpin(true);
+  
     if (spinSound.current) {
-      spinSound.current.currentTime = 0; // Reset the audio to the beginning
       spinSound.current.play();
     }
   
-    let newPrizeNumber;
-  
-    // Determine the result based on spin count
-    if (spinCount < 2) {
-      // Force "Better luck" for the first two spins
-      newPrizeNumber = segments.findIndex(
-        (segment) => segment.option === "Better luck"
-      );
-    } else {
-      // Randomly determine a prize for subsequent spins
-      newPrizeNumber = Math.floor(Math.random() * segments.length);
-    }
-  
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
-    setSpinCount(spinCount + 1); // Increment spin count
-  
-    setResult("");
+    setResult("");  // Reset result to show new prize
     setShowModal(false);
+  
+    // Mark the user as having spun once
+    setHasSpun(true);
   };
+  
+  
   
   
   const onFinished = (winner) => {

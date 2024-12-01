@@ -99,19 +99,18 @@ const navigate=useNavigate()
   };
 
   return (
-    <div
+    <div className="App"
       
       style={{ textAlign: "center", padding: "20px" }}
     >
-      <img src={logo} height={120} width={120}/>
+      <img src={logo} height={170} width={150}/>
      <div
   style={{
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "70vh",
-    // backgroundColor: "#282c34", // Optional background color
+   height:'auto',
     textAlign: "center",
     padding: "20px",
   }}
