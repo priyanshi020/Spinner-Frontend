@@ -2,7 +2,8 @@ import React, { useState, useRef } from "react";
 import { Wheel } from "react-custom-roulette";
 import Modal from "react-modal"; // Import the modal component
 import "./CSS/spinner.css";
-import sound from "../audio/wheel.wav";
+// import sound from "../audio/wheel.wav";
+import sound from "../audio/spinSound.mp3"
 import Navbar from "./Navbar";
 import logo from "../Images/tufcon-logo.png";
 import confettiGif from "../Images/confetti.gif"; // Replace with a spinning confetti GIF
@@ -63,7 +64,8 @@ function Spinner() {
   
     if (hasSpun === "true") {
       alert("You can't spin again. Please log in to continue.");
-      navigate('/')
+      localStorage.removeItem("hasSpun"); // Remove the flag before navigating
+      navigate('/'); // Redirect the user
       return;
     }
   
@@ -92,6 +94,7 @@ function Spinner() {
     setResult("");
     setShowModal(false);
   };
+  
   
   const onFinished = (winner) => {
     setResult(winner);
@@ -234,7 +237,7 @@ function Spinner() {
           <img
             src={image2}
             alt="Second Image"
-            style={{ width: "200px", marginTop: "-42px" }}
+            style={{ width: "100%", marginTop: "-85px" }}
           />
         </div>
       </div>

@@ -107,8 +107,8 @@ const Payment = () => {
               <p class="text-white-50 mb-5">Please enter your Name and UPI Id for secure payment</p>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
-              <label class="form-label" for="typeEmailX">Name</label>
-                <input type="text" value={name} placeholder='John Doe' onChange={(e) => setName(e.target.value)}  id="typeEmailX" class="form-control form-control-lg" />
+              <label class="form-label" for="typeEmailX">Email</label>
+                <input type="email" value={name} placeholder='John Doe' onChange={(e) => setName(e.target.value)}  id="typeEmailX" class="form-control form-control-lg" />
                
               </div>
 

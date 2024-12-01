@@ -1,8 +1,8 @@
 /* styles.css */
 .App {
  
-  height: auto;
-  overflow: hidden;
+  height: 150vh;
+  /* overflow: hidden; */
 
   background: linear-gradient(135deg, #282c34, #4e4376);
   color: #ffffff;
