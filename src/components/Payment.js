@@ -6,70 +6,92 @@ const Payment = () => {
   const [name,setName]=useState('')
   const [upiId, setUpiId] = useState('success@razorpay'); 
   const prize = localStorage.getItem("prizeAmount");
-  const handlePayment = async () => {
-    try {
-      // Step 1: Create an order on the backend
-      const { data } = await axios.post(`${API_URL}payments/upi/create-order`, {
-        amount:prize,
-        currency: 'INR',
-        upi_id: upiId,
-      });
+  const username=localStorage.getItem('userName');
+  const mobileNumber=localStorage.getItem('mobileNumber')
+  // const handlePayment = async () => {
+  //   try {
+  //     // Step 1: Create an order on the backend
+  //     const { data } = await axios.post(`${API_URL}payments/upi/create-order`, {
+  //       amount:prize,
+  //       currency: 'INR',
+  //       upi_id: upiId,
+  //     });
 
-      if (data.success) {
+  //     if (data.success) {
         
-        const options = {
-          key: 'rzp_test_PZTDP6jXKZdcgB', 
-          amount: data.order.amount, 
-          currency: data.order.currency,
-          name: 'PRIYANSHI', 
-          description: 'Test Transaction',
-          image: 'https://your-logo-url.com/logo.png', 
-          order_id: data.order.id, 
-          handler: async (response) => {
+  //       const options = {
+  //         key: 'rzp_test_PZTDP6jXKZdcgB', 
+  //         amount: data.order.amount, 
+  //         currency: data.order.currency,
+  //         name: 'PRIYANSHI', 
+  //         description: 'Test Transaction',
+  //         image: 'https://your-logo-url.com/logo.png', 
+  //         order_id: data.order.id, 
+  //         handler: async (response) => {
           
-            try {
-              const verifyResponse = await axios.post(`${API_URL}payments/upi/verify-payment`, {
-                order_id: response.razorpay_order_id,
-                payment_id: response.razorpay_payment_id,
-                signature: response.razorpay_signature,
-              });
+  //           try {
+  //             const verifyResponse = await axios.post(`${API_URL}payments/upi/verify-payment`, {
+  //               order_id: response.razorpay_order_id,
+  //               payment_id: response.razorpay_payment_id,
+  //               signature: response.razorpay_signature,
+  //             });
 
-              if (verifyResponse.data.success) {
-                alert('Payment successful!');
-              } else {
-                alert('Payment verification failed!');
-              }
-            } catch (error) {
-              console.error('Error verifying payment', error);
-              alert('Payment verification error');
-            }
-          },
-          prefill: {
-            name: 'Test User',
-            email: 'test.user@example.com',
-            contact: '9893079903',
-          },
-          theme: {
-            color: '#F37254', 
-          },
-        };
+  //             if (verifyResponse.data.success) {
+  //               alert('Payment successful!');
+  //             } else {
+  //               alert('Payment verification failed!');
+  //             }
+  //           } catch (error) {
+  //             console.error('Error verifying payment', error);
+  //             alert('Payment verification error');
+  //           }
+  //         },
+  //         prefill: {
+  //           name: 'Test User',
+  //           email: 'test.user@example.com',
+  //           contact: '9893079903',
+  //         },
+  //         theme: {
+  //           color: '#F37254', 
+  //         },
+  //       };
 
        
-        const razorpayInstance = new window.Razorpay(options);
-        razorpayInstance.on('payment.failed', function (response) {
-          alert(`Payment failed: ${response.error.description}`);
-        });
+  //       const razorpayInstance = new window.Razorpay(options);
+  //       razorpayInstance.on('payment.failed', function (response) {
+  //         alert(`Payment failed: ${response.error.description}`);
+  //       });
 
-        razorpayInstance.open();
-      } else {
-        alert('Order creation failed!');
+  //       razorpayInstance.open();
+  //     } else {
+  //       alert('Order creation failed!');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error in payment process', error);
+  //     alert('Payment error. Please try again.');
+  //   }
+  // };
+
+  const handlePayment = async()=>{
+    try{
+      const { data } = await axios.post(`${API_URL}payouts/send`, {
+        name:username,
+        contactNumber:mobileNumber,
+        email:name,
+        amount:prize,
+        upi_id: upiId,
+      });
+      if(Response.status === 200){
+        alert('Payment successfull')
       }
-    } catch (error) {
-      console.error('Error in payment process', error);
-      alert('Payment error. Please try again.');
-    }
-  };
+      else{
+        alert('some error occured')
+      }
 
+    }catch(error){
+      console.log('error',error)
+    }
+  }
   return (
     <div style={{ padding: '20px' }}>
       {/* <h2>Razorpay Payment</h2>
@@ -108,7 +130,7 @@ const Payment = () => {
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
               <label class="form-label" for="typeEmailX">Email</label>
-                <input type="email" value={name} placeholder='John Doe' onChange={(e) => setName(e.target.value)}  id="typeEmailX" class="form-control form-control-lg" />
+                <input type="email" value={name} placeholder='john@gmail.com' onChange={(e) => setName(e.target.value)}  id="typeEmailX" class="form-control form-control-lg" />
                
               </div>
 

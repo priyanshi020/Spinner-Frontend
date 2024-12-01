@@ -20,7 +20,10 @@ const Login = ({ onLogin }) => {
         mobile_number: mobile,
       });
       console.log("Login Successful:", response.data);
-
+      const userName= response.data.name;
+      const mobileNumber=response.data.mobile_number
+      localStorage.setItem('userName',userName);
+      localStorage.setItem('mobileNumber',mobileNumber)
       onLogin();
       if (response.data.is_active === true) {
         navigate("/spinner");
