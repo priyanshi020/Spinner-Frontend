@@ -116,12 +116,12 @@ function Spinner() {
   };
 
   return (
-    <div className="App1">
+    <div className="App1" style={{overflow:'hidden'}}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} height={170} width={150} alt="Logo" />
+        <img src={logo} height={150} width={130} alt="Logo" />
       </div>
 
-      <div className="wheel-container pt-3">
+      <div className="wheel-container ">
         <Wheel
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
@@ -211,9 +211,7 @@ function Spinner() {
       </Modal>
 
       <div>
-        <h2 className="text-center mt-5">
-          Start Spin to see the magic happen!
-        </h2>
+       
         <div
           style={{
             display: "flex",
@@ -225,12 +223,12 @@ function Spinner() {
           <img
             src={image1}
             alt="First Image"
-            style={{ width: "70%", marginBottom: "-1px" }}
+            style={{ width: "46%", marginBottom: "-1px" }}
           />
           <img
             src={image2}
             alt="Second Image"
-            style={{ width: "70%", marginTop: "-20%" }}
+            style={{ width: "65%", marginTop: "-20%" }}
           />
         </div>
       </div>
