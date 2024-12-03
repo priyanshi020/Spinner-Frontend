@@ -3,13 +3,13 @@ import { Wheel } from "react-custom-roulette";
 import Modal from "react-modal"; // Import the modal component
 import "./CSS/spinner.css";
 // import sound from "../audio/wheel.wav";
-import sound from "../audio/spinSound.mp3"
+import sound from "../audio/spinSound.mp3";
 import Navbar from "./Navbar";
 import logo from "../Images/tufcon-logo.png";
 import confettiGif from "../Images/confetti.gif"; // Replace with a spinning confetti GIF
 import { useNavigate } from "react-router-dom";
 import betterLuckMp4 from "../Images/oops.mp4";
-import image1 from "../Images/Tiger.png";
+import image1 from "../Images/tigerji.png";
 import image2 from "../Images/TMT.png";
 const segments = [
   { option: "Better luck" },
@@ -58,42 +58,39 @@ function Spinner() {
   //   setShowModal(false);
   // };
 
-  const [hasSpun, setHasSpun] = useState(false);  // Track if the user has already spun
+  const [hasSpun, setHasSpun] = useState(false); // Track if the user has already spun
 
   const handleSpinClick = () => {
     // Prevent spin if user has already spun
     if (hasSpun) {
       alert("You can only spin once.");
-      navigate('/')
+      navigate("/");
       return;
     }
-  
+
     // Randomly determine a prize (no need for spin count)
     const newPrizeNumber = Math.floor(Math.random() * segments.length);
-  
+
     // Update states
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
-  
+
     if (spinSound.current) {
       spinSound.current.play();
     }
-  
-    setResult("");  // Reset result to show new prize
+
+    setResult(""); // Reset result to show new prize
     setShowModal(false);
-  
+
     // Mark the user as having spun once
     setHasSpun(true);
   };
-  
-  
-  
-  
+
   const onFinished = (winner) => {
     setResult(winner);
     setShowModal(true);
     setMustSpin(false);
-  
+
     if (winner.includes("Better luck")) {
       // Set the "hasSpun" flag in localStorage
       localStorage.setItem("hasSpun", "true");
@@ -105,7 +102,6 @@ function Spinner() {
       console.log(`Prize saved in localStorage: ${prizeAmount}`);
     }
   };
-  
 
   const closeModal = () => {
     setShowModal(false);
@@ -116,7 +112,7 @@ function Spinner() {
   };
 
   return (
-    <div className="App1" style={{overflow:'hidden'}}>
+    <div className="App1" style={{ overflow: "hidden" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <img src={logo} height={150} width={130} alt="Logo" />
       </div>
@@ -148,70 +144,88 @@ function Spinner() {
       </div>
 
       <Modal
-        isOpen={showModal}
-        onRequestClose={closeModal}
-        style={{
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            transform: "translate(-50%, -50%)",
-            width: "400px",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "10px",
-            border: "none",
-            background: "#f8f8f8",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-            zIndex: 9999, // Ensure this is above the spinner
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            zIndex: 9998, // Slightly lower than content
-          },
-        }}
-      >
-        {result.includes("Better luck") ? (
-          <video
-            src={betterLuckMp4}
-            autoPlay
-            loop
-            muted
-            width={300}
-            style={{ borderRadius: "10px" }}
-          ></video>
-        ) : (
-          <img
-            src={confettiGif}
-            alt="Confetti"
-            width={300}
-            style={{ borderRadius: "10px" }}
-          />
-        )}
-        <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>
-          {result}
-        </h2>
-        {!result.includes("Better luck") && (
-          <button
-            onClick={redirectToForm}
-            style={{
-              marginTop: "20px",
-              background: "#34A24F",
-              color: "#fff",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Claim Your Prize
-          </button>
-        )}
-      </Modal>
+  isOpen={showModal}
+  onRequestClose={closeModal}
+  shouldCloseOnOverlayClick={false} // Prevent closing on overlay click
+  style={{
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%)",
+      width: "400px",
+      textAlign: "center",
+      padding: "20px",
+      borderRadius: "10px",
+      border: "none",
+      background: "#f8f8f8",
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+      zIndex: 9999, // Ensure this is above the spinner
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      zIndex: 9998, // Slightly lower than content
+    },
+  }}
+>
+  {/* Close Button */}
+  <button
+    onClick={closeModal}
+    style={{
+      position: "absolute",
+      top: "10px",
+      right: "10px",
+      background: "transparent",
+      border: "none",
+      fontSize: "18px",
+      cursor: "pointer",
+    }}
+  >
+    ✖
+  </button>
+
+  {/* Modal Content */}
+  {result.includes("Better luck") ? (
+    <video
+      src={betterLuckMp4}
+      autoPlay
+      loop
+      muted
+      width={300}
+      style={{ borderRadius: "10px" }}
+    ></video>
+  ) : (
+    <img
+      src={confettiGif}
+      alt="Confetti"
+      width={300}
+      style={{ borderRadius: "10px" }}
+    />
+  )}
+  <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>
+    {result}
+  </h2>
+  {!result.includes("Better luck") && (
+    <button
+      onClick={redirectToForm}
+      style={{
+        marginTop: "20px",
+        background: "#34A24F",
+        color: "#fff",
+        border: "none",
+        padding: "10px 20px",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+    >
+      Claim Your Prize
+    </button>
+  )}
+</Modal>
+
 
       <div>
-       
         <div
           style={{
             display: "flex",
@@ -223,12 +237,11 @@ function Spinner() {
           <img
             src={image1}
             alt="First Image"
-            style={{ width: "46%", marginBottom: "-1px" }}
-          />
-          <img
-            src={image2}
-            alt="Second Image"
-            style={{ width: "65%", marginTop: "-20%" }}
+            style={{
+              width: "100%", // Makes the image responsive
+              maxWidth: "600px", // Limits the maximum size of the image
+              height: "auto", // Maintains the aspect ratio
+            }}
           />
         </div>
       </div>

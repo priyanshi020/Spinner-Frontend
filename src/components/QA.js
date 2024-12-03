@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal"; // Install using `npm install react-modal`
-import logo from '../Images/tufcon-logo.png'
+import logo from "../Images/tufcon-logo.png";
 import { useNavigate } from "react-router-dom";
+import './CSS/QA.css'
 const QA = () => {
   const questionsData = [
     {
@@ -71,7 +72,7 @@ const QA = () => {
   const [showModal, setShowModal] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   console.log("qdata", questionsData);
-const navigate=useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     // Randomly pick a question on component load
     const randomIndex = Math.floor(Math.random() * questionsData.length);
@@ -94,64 +95,61 @@ const navigate=useNavigate()
   };
 
   const openPaymentForm = () => {
-    navigate('/payment')
+    navigate("/payment");
     closeModal();
   };
 
   return (
-    <div className="App"
-      
-      style={{ textAlign: "center", padding: "20px" }}
-    >
-      <img src={logo} height={170} width={150}/>
-     <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-   height:'auto',
-    textAlign: "center",
-    padding: "20px",
-  }}
->
-  <h1 style={{ marginBottom: "20px", color: "#fff" }}>
-    Choose the Correct Answer
-  </h1>
-  {currentQuestion && (
-    <>
-      <div style={{ marginBottom: "20px" }}>
-        <h2 className="text-white">{currentQuestion.question}</h2>
-      </div>
+    <div className="Apps" style={{ textAlign: "center", padding: "20px" }}>
+      <img src={logo} height={170} width={150} />
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           justifyContent: "center",
-          gap: "20px",
-          flexWrap: "wrap",
+          height: "auto",
+          textAlign: "center",
+          padding: "20px",
         }}
       >
-        {currentQuestion.options.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => handleOptionClick(option)}
-            style={{
-              background: "#f0f0f0",
-              color: "#333",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-              padding: "10px 20px",
-              cursor: "pointer",
-              fontSize: "16px",
-            }}
-          >
-            {option}
-          </button>
-        ))}
+        <h1 style={{ marginBottom: "20px", color: "#fff" }}>
+          Choose the Correct Answer
+        </h1>
+        {currentQuestion && (
+          <>
+            <div style={{ marginBottom: "20px" }}>
+              <h2 className="text-white">{currentQuestion.question}</h2>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "20px",
+                flexWrap: "wrap",
+              }}
+            >
+              {currentQuestion.options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleOptionClick(option)}
+                  style={{
+                    background: "#f0f0f0",
+                    color: "#333",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
-    </>
-  )}
-</div>
 
       {/* Modal */}
       <Modal
@@ -164,7 +162,8 @@ const navigate=useNavigate()
             right: "auto",
             bottom: "auto",
             transform: "translate(-50%, -50%)",
-            width: "400px",
+            width: "90%", // Adjusts width for smaller screens
+            maxWidth: "400px",
             textAlign: "center",
             padding: "20px",
             borderRadius: "10px",

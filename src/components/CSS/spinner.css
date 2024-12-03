@@ -1,51 +1,78 @@
+.App1 {
+  min-height: 100vh; /* Ensure it takes the full viewport height */
+  background: linear-gradient(135deg, #282c34, #4e4376);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Add padding for smaller screens */
+  box-sizing: border-box; /* Include padding and borders in element's width and height */
+}
 
 .wheel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px; /* Limit the width on larger screens */
+  margin: 20px 0; /* Space around the wheel container */
+}
+
+.spin-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background: black;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.spin-button:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App1 {
+    padding: 10px;
   }
-  
+
+  .wheel-container {
+    max-width: 300px;
+  }
+
   .spin-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 30px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-    background: black;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .spin-button:hover {
-    transform: translate(-50%, -50%) scale(1.05);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 30px 27px;
+    font-size: 14px;
   }
 
-  /* Target the arrow within the Wheel component */
-.wheel-container .arrow {
-  animation: none; /* No animation by default */
-}
-
-.wheel-container .arrow.arrow-animate {
-  animation: bounce 0.2s ease-in-out infinite alternate;
-}
-
-@keyframes bounce {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.2);
+  .Modal {
+    width: 80%; /* Adjust modal width on smaller screens */
   }
 }
 
-  
-  
-  
+@media (max-width: 480px) {
+  .App1 {
+    padding: 5px;
+  }
+
+  .wheel-container {
+    max-width: 200px;
+  }
+
+  .spin-button {
+    padding: 25px 27px;
+    font-size: 12px;
+  }
+}
