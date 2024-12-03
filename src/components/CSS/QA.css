@@ -1,6 +1,9 @@
 .Apps {
     min-height: 100vh; /* Ensure the height covers the viewport */
-    background: linear-gradient(135deg, #282c34, #4e4376);
+    background-image: url("../../Images/base.jpg");
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center center;
     color: #ffffff;
     text-align: center;
     padding: 20px;

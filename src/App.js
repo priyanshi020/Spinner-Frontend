@@ -11,6 +11,7 @@ import Payment from "./components/Payment";
 import Login from "./components/Login";
 import QA from "./components/QA";
 import "bootstrap/dist/css/bootstrap.min.css";
+import CustomWheel from "./components/CustomWheel";
 
 // ProtectedRoute Component
 const ProtectedRoute = ({ element, isLoggedIn }) => {
@@ -30,8 +31,9 @@ function App() {
       <Router>
         <Routes>
           {/* Public Route */}
-          <Route path="/" element={<Login onLogin={handleLogin} />} />
-          {/* <Route path='/' element={<Spinner/>}/> */}
+          {/* <Route path="/" element={<Login onLogin={handleLogin} />} /> */}
+          <Route path="/wheel" element={<CustomWheel/>}/>
+          <Route path='/' element={<QA/>}/>
           
           {/* Protected Routes */}
           <Route

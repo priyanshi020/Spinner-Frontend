@@ -1,0 +1,13 @@
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .wheel {
+    background: url('../../Images/spinImage.png') no-repeat center;
+    animation: spin 3s ease-in-out infinite;
+  }
+  
