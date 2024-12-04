@@ -177,7 +177,8 @@ const Login = ({onLogin}) => {
         justifyContent: "center",
         alignItems: "center", 
         backgroundColor: "#FF6005",
-        position: "relative", 
+        position: "relative",
+        overflow:'hidden' 
       }}
     >
       {/* Input fields */}

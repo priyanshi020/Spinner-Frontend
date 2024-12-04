@@ -37,23 +37,24 @@ const Payment = () => {
 
   return (
     <div
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #282c34, #4e4376)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '20px',
-      }}
+      // style={{
+      //   minHeight: '100vh',
+      //   background: 'linear-gradient(135deg, #282c34, #4e4376)',
+      //   display: 'flex',
+      //   justifyContent: 'center',
+      //   alignItems: 'center',
+      //   padding: '20px',
+      // }}
+      className='Apps'
     >
       <div
-        className="card bg-dark text-white"
+        className="card bg-white text-dark"
         style={{ borderRadius: '1rem', maxWidth: '500px', width: '100%' }}
       >
         <div className="card-body p-5 text-center">
           <div className="mb-md-5 mt-md-4 pb-3">
             <h2 className="fw-bold mb-2 text-uppercase">Payment</h2>
-            <p className="text-white-50 mb-5">
+            <p className="text-dark-50 mb-5">
               Please enter your Email and UPI Id for secure payment
             </p>
             <div className="form-outline form-white mb-4">
@@ -84,7 +85,8 @@ const Payment = () => {
             </div>
             <button
               onClick={handlePayment}
-              className="btn btn-outline-light btn-lg px-5 mt-5"
+              style={{backgroundColor:'brown' ,color:'white'}}
+              className="btn  btn-lg px-5 mt-5"
               type="submit"
               disabled={loading} // Disable button while loading
             >

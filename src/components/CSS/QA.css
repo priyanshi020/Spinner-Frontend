@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box; /* Includes padding in width and height */
+    overflow: hidden;
   }
   
   button {

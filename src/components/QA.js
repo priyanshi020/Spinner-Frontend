@@ -99,7 +99,14 @@ const QA = () => {
     closeModal();
   };
 
+  const handleIncorrect = () => {
+    closeModal(); // Close the modal
+    navigate("/"); // Redirect to login page
+  };
+
+ 
   return (
+    <>
     <div className="Apps" style={{ textAlign: "center", padding: "20px" }}>
       <img src={logo} height={170} width={150} />
       <div
@@ -113,7 +120,7 @@ const QA = () => {
           padding: "20px",
         }}
       >
-        <h1 style={{ marginBottom: "20px", color: "#fff" }}>
+        <h1 className="text-dark" style={{ marginBottom: "20px", color: "#fff" }}>
           Choose the Correct Answer
         </h1>
         {currentQuestion && (
@@ -153,69 +160,89 @@ const QA = () => {
 
       {/* Modal */}
       <Modal
-        isOpen={showModal}
-        onRequestClose={closeModal}
+      isOpen={showModal}
+      onRequestClose={closeModal}
+      shouldCloseOnOverlayClick={false} // Prevent closing on outside click
+      style={{
+        content: {
+          top: "50%",
+          left: "50%",
+          right: "auto",
+          bottom: "auto",
+          transform: "translate(-50%, -50%)",
+          width: "90%", // Adjusts width for smaller screens
+          maxWidth: "400px",
+          textAlign: "center",
+          padding: "20px",
+          borderRadius: "10px",
+          border: "none",
+          background: isCorrect ? "#d4edda" : "#f8d7da",
+          color: isCorrect ? "#155724" : "#721c24",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+          position: "relative", // Required for positioning the close icon
+        },
+        overlay: {
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+        },
+      }}
+    >
+      {/* Close Icon */}
+      <button
+        onClick={handleIncorrect}
         style={{
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            transform: "translate(-50%, -50%)",
-            width: "90%", // Adjusts width for smaller screens
-            maxWidth: "400px",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "10px",
-            border: "none",
-            background: isCorrect ? "#d4edda" : "#f8d7da",
-            color: isCorrect ? "#155724" : "#721c24",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-          },
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-          },
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          background: "transparent",
+          border: "none",
+          fontSize: "20px",
+          cursor: "pointer",
+          color: isCorrect ? "#155724" : "#721c24",
         }}
       >
-        {isCorrect ? (
-          <>
-            <h2>🎉 Correct Answer!</h2>
-            <button
-              onClick={openPaymentForm}
-              style={{
-                marginTop: "20px",
-                background: "#34A24F",
-                color: "#fff",
-                border: "none",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              Proceed to Payment
-            </button>
-          </>
-        ) : (
-          <>
-            <h2>❌ Wrong Answer!</h2>
-            <button
-              onClick={closeModal}
-              style={{
-                marginTop: "20px",
-                background: "#ccc",
-                color: "#000",
-                border: "none",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              Try Again
-            </button>
-          </>
-        )}
-      </Modal>
+        &times;
+      </button>
+
+      {isCorrect ? (
+        <>
+          <h2>🎉 Correct Answer!</h2>
+          <button
+            onClick={openPaymentForm}
+            style={{
+              marginTop: "20px",
+              background: "#34A24F",
+              color: "#fff",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Proceed to Payment
+          </button>
+        </>
+      ) : (
+        <>
+          <h2>❌ Wrong Answer!</h2>
+          <button
+            onClick={handleIncorrect}
+            style={{
+              marginTop: "20px",
+              background: "#ccc",
+              color: "#000",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Go to Login
+          </button>
+        </>
+      )}
+    </Modal>
     </div>
+    </>
   );
 };
 

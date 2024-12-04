@@ -31,9 +31,9 @@ function App() {
       <Router>
         <Routes>
           {/* Public Route */}
-          {/* <Route path="/" element={<Login onLogin={handleLogin} />} /> */}
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
           <Route path="/wheel" element={<CustomWheel/>}/>
-          <Route path='/' element={<QA/>}/>
+          {/* <Route path='/' element={<QA/>}/> */}
           
           {/* Protected Routes */}
           <Route
@@ -50,11 +50,11 @@ function App() {
           />
         </Routes>
         {/* Logout Button for testing */}
-        {isLoggedIn && (
-          <button onClick={handleLogout} className="btn btn-danger" style={{ position: "fixed", bottom: 20, right: 20 }}>
+        {/* {isLoggedIn && (
+          <button onClick={handle} className="btn btn-danger" style={{ position: "fixed", bottom: 20, right: 20 }}>
             Logout
           </button>
-        )}
+        )} */}
       </Router>
     </div>
   );
