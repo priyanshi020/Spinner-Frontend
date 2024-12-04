@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { API_URL } from '../service';
-import './CSS/payment.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { API_URL } from "../service";
+import "./CSS/payment.css";
 
 const Payment = () => {
-  const [name, setName] = useState('');
-  const [upiId, setUpiId] = useState('success@razorpay');
+  const [name, setName] = useState("");
+  const [upiId, setUpiId] = useState("success@razorpay");
   const [loading, setLoading] = useState(false); // State for loading
-  const prize = localStorage.getItem('prizeAmount');
-  const username = localStorage.getItem('userName');
-  const mobileNumber = localStorage.getItem('mobileNumber');
+  const prize = localStorage.getItem("prizeAmount");
+  const username = localStorage.getItem("userName");
+  const mobileNumber = localStorage.getItem("mobileNumber");
 
   const handlePayment = async () => {
-    setLoading(true); // Start loader
+    setLoading(true);
     try {
       const { data } = await axios.post(`${API_URL}payouts/send`, {
         name: username,
@@ -23,33 +23,23 @@ const Payment = () => {
       });
 
       if (data?.status === 200) {
-        alert('Payment successful!');
+        alert("Payment successful!");
       } else {
-        alert('Some error occurred');
+        alert("Some error occurred");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Payment failed. Please try again.');
+      console.error("Error:", error);
+      alert("Payment failed. Please try again.");
     } finally {
-      setLoading(false); // Stop loader
+      setLoading(false);
     }
   };
 
   return (
-    <div
-      // style={{
-      //   minHeight: '100vh',
-      //   background: 'linear-gradient(135deg, #282c34, #4e4376)',
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   alignItems: 'center',
-      //   padding: '20px',
-      // }}
-      className='Apps'
-    >
+    <div className="Apps">
       <div
         className="card bg-white text-dark"
-        style={{ borderRadius: '1rem', maxWidth: '500px', width: '100%' }}
+        style={{ borderRadius: "1rem", maxWidth: "500px", width: "100%" }}
       >
         <div className="card-body p-5 text-center">
           <div className="mb-md-5 mt-md-4 pb-3">
@@ -85,7 +75,7 @@ const Payment = () => {
             </div>
             <button
               onClick={handlePayment}
-              style={{backgroundColor:'brown' ,color:'white'}}
+              style={{ backgroundColor: "brown", color: "white" }}
               className="btn  btn-lg px-5 mt-5"
               type="submit"
               disabled={loading} // Disable button while loading
@@ -95,7 +85,7 @@ const Payment = () => {
                   <i className="fas fa-spinner fa-spin"></i> Processing...
                 </span>
               ) : (
-                'Pay with Razorpay'
+                "Pay with Razorpay"
               )}
             </button>
           </div>

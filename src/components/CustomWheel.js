@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CSS/wheel.css"; // Ensure this file has relevant styles
+import "./CSS/wheel.css"; 
 import wheelImage from "../Images/spinImage.png";
 import pinImage from "../Images/spinPin.png";
 
@@ -8,11 +8,11 @@ const prizes = ["Prize 1", "Prize 2", "Prize 3", "Prize 4", "Prize 5", "Prize 6"
 const CustomWheel = () => {
   const [spinning, setSpinning] = useState(false);
   const [spinAngle, setSpinAngle] = useState(0);
-  const [prize, setPrize] = useState(null); // State to display the prize
+  const [prize, setPrize] = useState(null); 
 
   const startSpin = () => {
     const segmentAngle = 360 / prizes.length;
-    const randomSpin = Math.floor(Math.random() * 360) + 360 * 3; // Random + 3 full rotations
+    const randomSpin = Math.floor(Math.random() * 360) + 360 * 3; 
     const finalAngle = randomSpin % 360;
     const selectedSegment = Math.floor((360 - finalAngle) / segmentAngle) % prizes.length;
 
@@ -21,7 +21,7 @@ const CustomWheel = () => {
 
     setTimeout(() => {
       setSpinning(false);
-      setPrize(prizes[selectedSegment]); // Set the prize to be displayed
+      setPrize(prizes[selectedSegment]); 
     }, 3000);
   };
 

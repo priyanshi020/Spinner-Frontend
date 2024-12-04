@@ -116,21 +116,21 @@
 // };
 
 // export default Login;
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import login from "../Images/loginBg.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../service";
 
-const Login = ({onLogin}) => {
+const Login = ({ onLogin }) => {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // Loader state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleGo = async () => {
-    setLoading(true); // Show loader
+    setLoading(true);
     try {
       const response = await axios.post(`${API_URL}users/login`, {
         name: name,
@@ -153,13 +153,13 @@ const Login = ({onLogin}) => {
         err.response?.data?.message || "An error occurred. Please try again."
       );
     } finally {
-      setLoading(false); // Hide loader
+      setLoading(false);
     }
   };
 
   const handleMobileChange = (e) => {
     const value = e.target.value;
-    // Allow only numbers and limit to 10 digits
+
     if (/^\d{0,10}$/.test(value)) {
       setMobile(value);
     }
@@ -168,30 +168,30 @@ const Login = ({onLogin}) => {
     <div
       style={{
         backgroundImage: `url(${login})`,
-        backgroundSize: "contain", 
-        backgroundRepeat: "no-repeat", 
-        backgroundPosition: "center center", 
-        height: "100vh", 
-        width: "100vw", 
-        display: "flex", 
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
         justifyContent: "center",
-        alignItems: "center", 
+        alignItems: "center",
         backgroundColor: "#FF6005",
         position: "relative",
-        overflow:'hidden' 
+        overflow: "hidden",
       }}
     >
       {/* Input fields */}
       <div
         style={{
           position: "absolute",
-          bottom: "10%", // Adjust vertical position
+          bottom: "12%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "1rem", // Space between input fields
-          width: "80%", // Responsive width for inputs
-          maxWidth: "400px", // Limit max width of input container
+          gap: "1rem",
+          width: "80%",
+          maxWidth: "400px",
         }}
       >
         <input

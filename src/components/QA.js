@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal"; // Install using `npm install react-modal`
 import logo from "../Images/tufcon-logo.png";
 import { useNavigate } from "react-router-dom";
-import './CSS/QA.css'
+import "./CSS/QA.css";
 const QA = () => {
   const questionsData = [
     {
@@ -74,12 +74,10 @@ const QA = () => {
   console.log("qdata", questionsData);
   const navigate = useNavigate();
   useEffect(() => {
-    // Randomly pick a question on component load
     const randomIndex = Math.floor(Math.random() * questionsData.length);
     setCurrentQuestion(questionsData[randomIndex]);
-    console.log("current", currentQuestion);
   }, []);
-  console.log("hrlooo");
+
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     if (option === currentQuestion.correctAnswer) {
@@ -87,7 +85,7 @@ const QA = () => {
     } else {
       setIsCorrect(false);
     }
-    setShowModal(true); // Open modal for feedback
+    setShowModal(true);
   };
 
   const closeModal = () => {
@@ -100,148 +98,196 @@ const QA = () => {
   };
 
   const handleIncorrect = () => {
-    closeModal(); // Close the modal
-    navigate("/"); // Redirect to login page
+    closeModal();
+    navigate("/");
   };
 
- 
   return (
     <>
-    <div className="Apps" style={{ textAlign: "center", padding: "20px" }}>
-      <img src={logo} height={170} width={150} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "auto",
-          textAlign: "center",
-          padding: "20px",
-        }}
-      >
-        <h1 className="text-dark" style={{ marginBottom: "20px", color: "#fff" }}>
-          Choose the Correct Answer
-        </h1>
-        {currentQuestion && (
-          <>
-            <div style={{ marginBottom: "20px" }}>
-              <h2 className="text-white">{currentQuestion.question}</h2>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "20px",
-                flexWrap: "wrap",
-              }}
-            >
-              {currentQuestion.options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleOptionClick(option)}
-                  style={{
-                    background: "#f0f0f0",
-                    color: "#333",
-                    border: "1px solid #ccc",
-                    borderRadius: "5px",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    fontSize: "16px",
-                  }}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* Modal */}
-      <Modal
-      isOpen={showModal}
-      onRequestClose={closeModal}
-      shouldCloseOnOverlayClick={false} // Prevent closing on outside click
-      style={{
-        content: {
-          top: "50%",
-          left: "50%",
-          right: "auto",
-          bottom: "auto",
-          transform: "translate(-50%, -50%)",
-          width: "90%", // Adjusts width for smaller screens
-          maxWidth: "400px",
-          textAlign: "center",
-          padding: "20px",
-          borderRadius: "10px",
-          border: "none",
-          background: isCorrect ? "#d4edda" : "#f8d7da",
-          color: isCorrect ? "#155724" : "#721c24",
-          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-          position: "relative", // Required for positioning the close icon
-        },
-        overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-        },
-      }}
-    >
-      {/* Close Icon */}
-      <button
-        onClick={handleIncorrect}
-        style={{
-          position: "absolute",
-          top: "10px",
-          right: "10px",
-          background: "transparent",
-          border: "none",
-          fontSize: "20px",
-          cursor: "pointer",
-          color: isCorrect ? "#155724" : "#721c24",
-        }}
-      >
-        &times;
-      </button>
-
-      {isCorrect ? (
-        <>
-          <h2>🎉 Correct Answer!</h2>
-          <button
-            onClick={openPaymentForm}
-            style={{
-              marginTop: "20px",
-              background: "#34A24F",
-              color: "#fff",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
+      <div className="Apps1" style={{ textAlign: "center", padding: "20px" }}>
+        <img src={logo} height={220} width={200} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "auto",
+            textAlign: "center",
+            padding: "20px",
+          }}
+        >
+          <h1
+            className="text-dark mb-5"
+            style={{ marginBottom: "10px", color: "#fff",fontSize:'35px' }}
           >
-            Proceed to Payment
-          </button>
-        </>
-      ) : (
-        <>
-          <h2>❌ Wrong Answer!</h2>
+            Choose the Correct Answer
+          </h1>
+          {currentQuestion && (
+            <>
+              <div className="mt-2" style={{ marginBottom: "50px" }}>
+                <h2 style={{fontSize:'35px'}} className="text-white">{currentQuestion.question}</h2>
+              </div>
+              <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "20px",
+  }}
+>
+  {/* First Row */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-around",
+      gap: "20px",
+    }}
+  >
+    {["a", "b"].map((label, index) => (
+      <button
+        key={index}
+        onClick={() => handleOptionClick(currentQuestion.options[index])}
+        style={{
+          background: "#f0f0f0",
+          color: "#333",
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "15px 33px",
+          cursor: "pointer",
+          fontSize: "16px",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <span style={{ fontWeight: "bold" }}>{label}.</span>
+        {currentQuestion.options[index]}
+      </button>
+    ))}
+  </div>
+
+  {/* Second Row */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-around",
+      gap: "20px",
+    }}
+  >
+    {["c", "d"].map((label, index) => (
+      <button
+        key={index + 2} // Offset index for the second row
+        onClick={() => handleOptionClick(currentQuestion.options[index + 2])}
+        style={{
+          background: "#f0f0f0",
+          color: "#333",
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "15px 33px",
+          cursor: "pointer",
+          fontSize: "16px",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <span style={{ fontWeight: "bold" }}>{label}.</span>
+        {currentQuestion.options[index + 2]}
+      </button>
+    ))}
+  </div>
+</div>
+
+            </>
+          )}
+        </div>
+
+        {/* Modal */}
+        <Modal
+          isOpen={showModal}
+          onRequestClose={closeModal}
+          shouldCloseOnOverlayClick={false}
+          style={{
+            content: {
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              transform: "translate(-50%, -50%)",
+              width: "90%",
+              maxWidth: "400px",
+              textAlign: "center",
+              padding: "20px",
+              borderRadius: "10px",
+              border: "none",
+              background: isCorrect ? "#d4edda" : "#f8d7da",
+              color: isCorrect ? "#155724" : "#721c24",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+              position: "relative",
+            },
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.6)",
+            },
+          }}
+        >
+          {/* Close Icon */}
           <button
             onClick={handleIncorrect}
             style={{
-              marginTop: "20px",
-              background: "#ccc",
-              color: "#000",
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              background: "transparent",
               border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
+              fontSize: "20px",
               cursor: "pointer",
+              color: isCorrect ? "#155724" : "#721c24",
             }}
           >
-            Go to Login
+            &times;
           </button>
-        </>
-      )}
-    </Modal>
-    </div>
+
+          {isCorrect ? (
+            <>
+              <h2>🎉 Correct Answer!</h2>
+              <button
+                onClick={openPaymentForm}
+                style={{
+                  marginTop: "20px",
+                  background: "#34A24F",
+                  color: "#fff",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Proceed to Payment
+              </button>
+            </>
+          ) : (
+            <>
+              <h2>❌ Wrong Answer!</h2>
+              <button
+                onClick={handleIncorrect}
+                style={{
+                  marginTop: "20px",
+                  background: "#ccc",
+                  color: "#000",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Go to Login
+              </button>
+            </>
+          )}
+        </Modal>
+      </div>
     </>
   );
 };
