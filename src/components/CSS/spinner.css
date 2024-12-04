@@ -22,7 +22,7 @@
   z-index: 1;
   width: 100%;
   max-width: 500px; /* Limit the width on larger screens */
-  margin: 20px 0; /* Space around the wheel container */
+  /* margin: 20px 0; Space around the wheel container */
 }
 
 .spin-button {
@@ -34,12 +34,13 @@
   font-size: 16px;
   font-weight: bold;
   color: #ffffff;
-  background: black;
+  background: #EDD871;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 
 .spin-button:hover {
   transform: translate(-50%, -50%) scale(1.05);

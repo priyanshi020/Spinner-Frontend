@@ -21,7 +21,7 @@ const segments = [
   { option: "Better luck" },
   { option: "Won 20 Rs." },
 ];
-const segColors = ["#EE4040", "#F0CF50", "#815CD1", "#3DA5E0", "#34A24F"];
+const segColors = ["#CC0005", "#FDF5EB", "#CC0005", "#FDF5EB", "#CC0005", "#FDF5EB"];
 
 Modal.setAppElement("#root");
 
@@ -109,7 +109,7 @@ function Spinner() {
   return (
     <div className="App1" style={{ overflow: "hidden" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} height={150} width={130} alt="Logo" />
+        <img src={logo} height={120} width={130} alt="Logo" />
       </div>
 
       <div className="wheel-container ">
@@ -118,10 +118,10 @@ function Spinner() {
           prizeNumber={prizeNumber}
           data={segments}
           backgroundColors={segColors}
-          textColors={["#ffffff"]}
+          textColors={["#EDD871"]}
           onStopSpinning={() => onFinished(segments[prizeNumber].option)}
-          outerBorderColor="black"
-          outerBorderWidth={8}
+          outerBorderColor="#EDD871"
+          outerBorderWidth={18}
           innerRadius={20}
           innerBorderColor="white"
           radiusLineWidth={8}
