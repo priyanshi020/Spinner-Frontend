@@ -238,8 +238,8 @@ function Spinner() {
             src={image1}
             alt="First Image"
             style={{
-              width: "100%", // Makes the image responsive
-              maxWidth: "600px", // Limits the maximum size of the image
+              width: "90%", // Makes the image responsive
+              maxWidth: "200px", // Limits the maximum size of the image
               height: "auto", // Maintains the aspect ratio
             }}
           />
