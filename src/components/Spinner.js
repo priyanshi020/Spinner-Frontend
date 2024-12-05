@@ -219,7 +219,7 @@ function Spinner() {
         )}
       </Modal>
 
-      <div>
+      {/* <div>
         <div
           style={{
             display: "flex",
@@ -238,7 +238,7 @@ function Spinner() {
             }}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

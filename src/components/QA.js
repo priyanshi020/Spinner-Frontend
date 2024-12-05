@@ -104,8 +104,8 @@ const QA = () => {
 
   return (
     <>
-      <div className="Apps1" style={{ textAlign: "center", padding: "20px" }}>
-        <img src={logo} height={220} width={200} />
+      <div className="Apps1" style={{ textAlign: "", padding: "20px" }}>
+        <img src={logo} height={120} width={100} />
         <div
           style={{
             display: "flex",
@@ -114,92 +114,96 @@ const QA = () => {
             justifyContent: "center",
             height: "auto",
             textAlign: "center",
-            padding: "20px",
+            padding: "0px",
           }}
         >
-          <h1
+          {/* <h1
             className="text-dark mb-5"
             style={{ marginBottom: "10px", color: "#fff",fontSize:'35px' }}
           >
             Choose the Correct Answer
-          </h1>
+          </h1> */}
           {currentQuestion && (
             <>
-              <div className="mt-2" style={{ marginBottom: "50px" }}>
-                <h2 style={{fontSize:'35px'}} className="text-white">{currentQuestion.question}</h2>
+              <div className="" style={{ marginBottom: "50px" }}>
+                <h2 style={{ fontSize: "25px" }} className="text-dark">
+                  {currentQuestion.question}
+                </h2>
               </div>
               <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "20px",
-  }}
->
-  {/* First Row */}
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-around",
-      gap: "20px",
-    }}
-  >
-    {["a", "b"].map((label, index) => (
-      <button
-        key={index}
-        onClick={() => handleOptionClick(currentQuestion.options[index])}
-        style={{
-          background: "#f0f0f0",
-          color: "#333",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          padding: "15px 33px",
-          cursor: "pointer",
-          fontSize: "16px",
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <span style={{ fontWeight: "bold" }}>{label}.</span>
-        {currentQuestion.options[index]}
-      </button>
-    ))}
-  </div>
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    gap: "20px",
+                  }}
+                >
+                  {["a", "b"].map((label, index) => (
+                    <button
+                      key={index}
+                      onClick={() =>
+                        handleOptionClick(currentQuestion.options[index])
+                      }
+                      style={{
+                        background: "#f0f0f0",
+                        color: "#333",
+                        border: "1px solid #ccc",
+                        borderRadius: "5px",
+                        padding: "15px 33px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <span style={{ fontWeight: "bold" }}>{label}.</span>
+                      {currentQuestion.options[index]}
+                    </button>
+                  ))}
+                </div>
 
-  {/* Second Row */}
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-around",
-      gap: "20px",
-    }}
-  >
-    {["c", "d"].map((label, index) => (
-      <button
-        key={index + 2} // Offset index for the second row
-        onClick={() => handleOptionClick(currentQuestion.options[index + 2])}
-        style={{
-          background: "#f0f0f0",
-          color: "#333",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          padding: "15px 33px",
-          cursor: "pointer",
-          fontSize: "16px",
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <span style={{ fontWeight: "bold" }}>{label}.</span>
-        {currentQuestion.options[index + 2]}
-      </button>
-    ))}
-  </div>
-</div>
-
+                {/* Second Row */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    gap: "20px",
+                  }}
+                >
+                  {["c", "d"].map((label, index) => (
+                    <button
+                      key={index + 2} // Offset index for the second row
+                      onClick={() =>
+                        handleOptionClick(currentQuestion.options[index + 2])
+                      }
+                      style={{
+                        background: "#f0f0f0",
+                        color: "#333",
+                        border: "1px solid #ccc",
+                        borderRadius: "5px",
+                        padding: "15px 33px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <span style={{ fontWeight: "bold" }}>{label}.</span>
+                      {currentQuestion.options[index + 2]}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </>
           )}
         </div>

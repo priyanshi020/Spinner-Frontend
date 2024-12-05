@@ -1,9 +1,11 @@
 .Apps1 {
-    min-height: 100vh; /* Ensure the height covers the viewport */
-    background-image: url("../../Images/base.jpg");
-    background-size: cover; /* Ensures the image covers the entire background */
+    height: 100vh; /* Ensure the height covers the viewport */
+    width:100vw;
+    background-image: url("../../Images/Spinner\ Page\ Background.jpg");
+    background-size: contain; /* Ensures the image covers the entire background */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-position: center center;
+    background-color: #FF6005;
     color: #ffffff;
     text-align: center;
     padding: 20px;

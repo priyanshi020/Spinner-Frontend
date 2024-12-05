@@ -1,15 +1,17 @@
 .App1 {
   min-height: 100vh; /* Ensure it takes the full viewport height */
-  background-image: url("../../Images/base.jpg");
-  background-size: cover; /* Ensures the image covers the entire background */
+  width:100vw;
+  background-image: url("../../Images/Spinner\ Page\ Background.jpg");
+  background-size: contain; /* Ensures the image covers the entire background */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-position: center center; /* Centers the image */
+  background-color: #FF6005;
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  padding: 20px; /* Add padding for smaller screens */
+  padding: 10px; /* Add padding for smaller screens */
   box-sizing: border-box; /* Include padding and borders in element's width and height */
 }
 
