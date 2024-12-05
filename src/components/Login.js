@@ -168,7 +168,7 @@ const Login = ({ onLogin }) => {
     <div
       style={{
         backgroundImage: `url(${login})`,
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         height: "100vh",
@@ -176,7 +176,7 @@ const Login = ({ onLogin }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#FF6005",
+        // backgroundColor: "#FF6005",
         position: "relative",
         overflow: "hidden",
       }}
