@@ -154,45 +154,56 @@ import React, { useState } from 'react';
 import './CSS/wheel.css';
 
 const CustomWheel = () => {
-  const segments = [
-    "Better luck ",
-    "10% off",
-    "5% off",
-    "Better luck ",
-    "20% off",
-    "15% off"
-  ];
-  const segColors = [
-    "black",
-    "#60BA97",
-    "black",
-    "#60BA97",
-    "black",
-    "#60BA97"
-  ];
-  const onFinished = (winner) => {
-    console.log(winner);
+  const [clicks, setClicks] = useState(0);
+  const [highlight, setHighlight] = useState(null);
+  const degree = 1800;
+
+  const spin = () => {
+    const newClicks = clicks + 1;
+    setClicks(newClicks);
+
+    const newDegree = degree * newClicks;
+    const extraDegree = Math.floor(Math.random() * 360) + 1;
+    const totalDegree = newDegree + extraDegree;
+
+    document.getElementById('inner-wheel').style.transform = `rotate(${totalDegree}deg)`;
+
+    const difficulty = getDifficulty(extraDegree);
+    setTimeout(() => {
+      setHighlight(difficulty);
+    }, 6000);
   };
+
+  const getDifficulty = (ranD) => {
+    if (ranD % 180 > 120) {
+      return 'easy';
+    } else if (ranD % 180 > 60) {
+      return 'medium';
+    } else {
+      return 'hard';
+    }
+  };
+
   return (
-    <div className="App">
-      <h1>Spinner wheel Demo for TDC</h1>
-      <div>
-        <WheelComponent
-          segments={segments}
-          segColors={segColors}
-          winningSegment="MM"
-          onFinished={(winner) => onFinished(winner)}
-          primaryColor="black"
-          contrastColor="white"
-          buttonText="Start"
-          isOnlyOnce={false}
-          size={190}
-          upDuration={500}
-          downDuration={600}
-          fontFamily="Helvetica"
-        />
+    <div className="difficulty-container">
+      <h1 className="title">Surrender to the Wheel of Fate</h1>
+      <div className="hero-div">
+        <div className="wheel">
+          <div id="inner-wheel">
+            {['Easy', 'Medium', 'Hard', 'Easy', 'Medium', 'Hard'].map((level, index) => (
+              <div
+                className={`sec ${highlight === level.toLowerCase() ? 'highlight' : ''}`}
+                key={index}
+              >
+                <span className={`fa ${level.toLowerCase()}`}>{level}</span>
+              </div>
+            ))}
+          </div>
+          <div id="spin">
+            <button id="inner-spin" onClick={spin}></button>
+          </div>
+        </div>
       </div>
-      <h2> Spin the wheel and win exiting offers</h2>
     </div>
   );
 };
