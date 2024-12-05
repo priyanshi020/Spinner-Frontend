@@ -2,7 +2,7 @@
     height: 100vh; /* Ensure the height covers the viewport */
     width:100vw;
     background-image: url("../../Images/spnnerBg.jpg");
-    background-size: contain; /* Ensures the image covers the entire background */
+    background-size: cover; /* Ensures the image covers the entire background */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-position: center center;
     background-color: #FF6005;
