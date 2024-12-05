@@ -1,7 +1,7 @@
 .App1 {
   min-height: 100vh; /* Ensure it takes the full viewport height */
   width:100vw;
-  background-image: url("../../Images/Spinner\ Page\ Background.jpg");
+  background-image: url("../../Images/spnnerBg.jpg");
   background-size: contain; /* Ensures the image covers the entire background */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-position: center center; /* Centers the image */

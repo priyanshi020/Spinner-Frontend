@@ -117,7 +117,7 @@
 
 // export default Login;
 import React, { useState, useEffect } from "react";
-import login from "../Images/Login Page Background.jpg";
+import login from "../Images/loginBackground.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../service";

@@ -11,52 +11,193 @@
     animation: spin 3s ease-in-out infinite;
   }
    */
-
-   
-   #app {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto;
+   /* :root {
+    --spin-deg: 0deg;
+  }
+  
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .spinner {
     position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: rotate(var(--spin-deg));
+    transition: transform 3s cubic-bezier(0.33, 1, 0.68, 1);
   }
   
-  .marker {
+  .spinner-segment {
     position: absolute;
-    width: 60px;
-    left: 172px;
-    top: -20px;
-    z-index: 2;
+    width: 50%;
+    height: 50%;
+    background: #f5f5f5;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
   }
   
-  .wheel {
-    width: 100%;
-    height: 100%;
+  .spinner-segment span {
+    transform: rotate(-45deg); 
   }
   
-  .button {
-    display: block;
-    width: 250px;
-    margin: 40px auto;
+  .spinner-segment:nth-child(odd) {
+    background: #ffd700;
+  }
+  
+  .spinner-segment:nth-child(even) {
+    background: #ffa07a;
+  }
+  
+  .spin-button {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1rem;
     cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   
-  .button:hover {
-    opacity: 0.8;
+  .spin-button:disabled {
+    background: #999;
+    cursor: not-allowed;
   }
   
-  .blur {
-    animation: blur 10s;
+  .prize-display {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
   }
-  
-  @keyframes blur {
-    0% {
-      filter: blur(1.5px);
-    }
-    80% {
-      filter: blur(1.5px);
-    }
-    100% {
-      filter: blur(0px);
-    }
+   */
+   .highlight {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
-  
+  /* Main container for wheel */
+.hero-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #333;
+}
+
+.wheel {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  background: conic-gradient(
+    #f00 0% 33.33%,
+    #ff0 33.33% 66.66%,
+    #0f0 66.66% 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Rotating inner-wheel */
+#inner-wheel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+  transition: transform 6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.sec {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  transform-origin: center;
+}
+
+.sec span {
+  transform: rotate(-60deg);
+}
+
+.sec:nth-child(1) {
+  background: #f00;
+  transform: rotate(0deg);
+}
+
+.sec:nth-child(2) {
+  background: #ff0;
+  transform: rotate(60deg);
+}
+
+.sec:nth-child(3) {
+  background: #0f0;
+  transform: rotate(120deg);
+}
+
+.sec:nth-child(4) {
+  background: #f00;
+  transform: rotate(180deg);
+}
+
+.sec:nth-child(5) {
+  background: #ff0;
+  transform: rotate(240deg);
+}
+
+.sec:nth-child(6) {
+  background: #0f0;
+  transform: rotate(300deg);
+}
+
+/* Spin button */
+#spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+#inner-spin {
+  width: 50px;
+  height: 50px;
+  background: #333;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+}
+
+.highlight {
+  color: black;
+  text-shadow: 0px 0px 5px white;
+}

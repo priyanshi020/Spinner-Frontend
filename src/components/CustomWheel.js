@@ -95,75 +95,106 @@
 
 // export default CustomWheel;
 
-import React, { useRef } from "react";
-import "./CSS/wheel.css"; // Import the CSS file for styling
-import wheelImage from "../Images/spinImage.png";
-import pinImage from "../Images/spinPin.png";
+// import React, { useState } from "react";
+// import "./CSS/wheel.css";
+
+// const CustomWheel = () => {
+//   const prizes = [
+//     "🎁 Gift 1",
+//     "💰 Prize 2",
+//     "🏆 Jackpot",
+//     "🎉 Bonus",
+//     "🍀 Luck",
+//     "🛍️ Surprise",
+//     "🎮 Game",
+//     "🍔 Food",
+//   ];
+//   const [selectedPrize, setSelectedPrize] = useState(null);
+//   const [spinning, setSpinning] = useState(false);
+
+//   const handleSpin = () => {
+//     if (spinning) return;
+//     setSpinning(true);
+
+//     const randomIndex = Math.floor(Math.random() * prizes.length);
+//     const spinDegrees = 360 * 3 + randomIndex * (360 / prizes.length); // Spin 3 times + land on prize
+//     document.documentElement.style.setProperty("--spin-deg", `${spinDegrees}deg`);
+
+//     setTimeout(() => {
+//       setSelectedPrize(prizes[randomIndex]);
+//       setSpinning(false);
+//     }, 3000);
+//   };
+
+//   return (
+//     <div className="spinner-container">
+//       <div className={`spinner ${spinning ? "spinning" : ""}`}>
+//         {prizes.map((prize, index) => (
+//           <div
+//             key={index}
+//             className="spinner-segment"
+//             style={{ transform: `rotate(${index * (360 / prizes.length)}deg)` }}
+//           >
+//             <span>{prize}</span>
+//           </div>
+//         ))}
+//         <button className="spin-button" onClick={handleSpin} disabled={spinning}>
+//           SPIN
+//         </button>
+//       </div>
+//       {selectedPrize && <div className="prize-display">🎉 {selectedPrize}</div>}
+//     </div>
+//   );
+// };
+
+// export default CustomWheel;
+
+
+import React, { useState } from 'react';
+import './CSS/wheel.css';
+
 const CustomWheel = () => {
-  const wheelRef = useRef(null);
-  const buttonRef = useRef(null);
-  let deg = 0;
-
-  const handleSpin = () => {
-    const wheel = wheelRef.current;
-    const button = buttonRef.current;
-
-    // Disable the button during spin
-    button.style.pointerEvents = "none";
-
-    // Calculate a new rotation between 5000 and 10,000 degrees
-    deg = Math.floor(5000 + Math.random() * 5000);
-
-    // Set the transition on the wheel
-    wheel.style.transition = "all 10s ease-out";
-
-    // Rotate the wheel
-    wheel.style.transform = `rotate(${deg}deg)`;
-
-    // Apply the blur
-    wheel.classList.add("blur");
+  const segments = [
+    "Better luck ",
+    "10% off",
+    "5% off",
+    "Better luck ",
+    "20% off",
+    "15% off"
+  ];
+  const segColors = [
+    "black",
+    "#60BA97",
+    "black",
+    "#60BA97",
+    "black",
+    "#60BA97"
+  ];
+  const onFinished = (winner) => {
+    console.log(winner);
   };
-
-  const handleTransitionEnd = () => {
-    const wheel = wheelRef.current;
-    const button = buttonRef.current;
-
-    // Remove the blur
-    wheel.classList.remove("blur");
-
-    // Enable the button after the spin
-    button.style.pointerEvents = "auto";
-
-    // Reset transition
-    wheel.style.transition = "none";
-
-    // Calculate the actual degree on a 360-degree basis
-    const actualDeg = deg % 360;
-
-    // Set the real rotation instantly without animation
-    wheel.style.transform = `rotate(${actualDeg}deg)`;
-  };
-
   return (
-    <div id="app">
-      <img className="marker" src={pinImage} alt="Marker" />
-      <img
-        ref={wheelRef}
-        className="wheel"
-        src={wheelImage}
-        alt="Wheel"
-        onTransitionEnd={handleTransitionEnd}
-      />
-      <img
-        ref={buttonRef}
-        className="button"
-        src={pinImage}
-        alt="Spin Button"
-        onClick={handleSpin}
-      />
+    <div className="App">
+      <h1>Spinner wheel Demo for TDC</h1>
+      <div>
+        <WheelComponent
+          segments={segments}
+          segColors={segColors}
+          winningSegment="MM"
+          onFinished={(winner) => onFinished(winner)}
+          primaryColor="black"
+          contrastColor="white"
+          buttonText="Start"
+          isOnlyOnce={false}
+          size={190}
+          upDuration={500}
+          downDuration={600}
+          fontFamily="Helvetica"
+        />
+      </div>
+      <h2> Spin the wheel and win exiting offers</h2>
     </div>
   );
 };
 
 export default CustomWheel;
-
