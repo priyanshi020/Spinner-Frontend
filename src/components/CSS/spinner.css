@@ -22,9 +22,9 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
-  width: 100%;
-  max-width: 500px; /* Limit the width on larger screens */
-  /* margin: 20px 0; Space around the wheel container */
+  width: 120%;
+  height: 160%;
+
 }
 
 .spin-button {

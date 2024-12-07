@@ -149,50 +149,71 @@
 
 // export default CustomWheel;
 
-
-import React, { useState } from 'react';
-import './CSS/wheel.css';
+import React, { useState, useRef } from "react";
+import "./CSS/wheel.css"; // Import the CSS file for styling
 
 const CustomWheel = () => {
-  const segments = [
-    "Better luck ",
-    "10% off",
-    "5% off",
-    "Better luck ",
-    "20% off",
-    "15% off"
-  ];
-  const segColors = [
-    "black",
-    "#60BA97",
-    "black",
-    "#60BA97",
-    "black",
-    "#60BA97"
-  ];
-  const onFinished = (winner) => {
-    console.log(winner);
+  const [clicks, setClicks] = useState(0);
+  const wheelRef = useRef(null);
+  const prizes = ["Prize 1", "Prize 2", "Prize 3", "Prize 4", "Prize 5", "Prize 6", "Prize 7", "Prize 8"];
+
+  const handleSpinClick = () => {
+    const degree = 1800; // Base degree (5 full rotations)
+    const newClicks = clicks + 1;
+    const newDegree = degree * newClicks;
+    const extraDegree = Math.floor(Math.random() * 360) + 1;
+    const totalDegree = newDegree + extraDegree;
+
+    setClicks(newClicks);
+
+    // Rotate the wheel
+    if (wheelRef.current) {
+      wheelRef.current.style.transform = `rotate(${totalDegree}deg)`;
+    }
   };
+
   return (
-    <div className="App">
-      <h1>Spinner wheel Demo for TDC</h1>
-      <div>
-        {/* <WheelComponent
-          segments={segments}
-          segColors={segColors}
-          winningSegment="MM"
-          onFinished={(winner) => onFinished(winner)}
-          primaryColor="black"
-          contrastColor="white"
-          buttonText="Start"
-          isOnlyOnce={false}
-          size={190}
-          upDuration={500}
-          downDuration={600}
-          fontFamily="Helvetica"
-        /> */}
+    <div id="wrapper">
+      <div id="wheel">
+        {/* <div id="inner-wheel" ref={wheelRef}>
+          <div className="sec">
+            <span className="fa fa-bell-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-comment-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-smile-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-heart-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-star-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-lightbulb-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-lightbulb-o"></span>
+          </div>
+          <div className="sec">
+            <span className="fa fa-lightbulb-o"></span>
+          </div>
+        </div> */}
+        <div id="inner-wheel" ref={wheelRef}>
+            {prizes.map((prize, index) => (
+              <div className="sec" key={index} style={{ transform: `rotate(${index * 45}deg)` }}>
+                <span className="prize-text">{prize}</span>
+              </div>
+            ))}
+          </div>
+        <div id="spin" onClick={handleSpinClick}>
+          <div id="inner-spin"></div>
+        </div>
+        <div id="shine"></div>
       </div>
-      <h2> Spin the wheel and win exiting offers</h2>
+      <div id="txt">Click the spin button!</div>
     </div>
   );
 };
