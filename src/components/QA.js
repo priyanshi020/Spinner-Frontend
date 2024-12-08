@@ -105,7 +105,7 @@ const QA = () => {
   return (
     <>
       <div className="Apps1" style={{ textAlign: "", padding: "20px" }}>
-        <img src={logo} height={120} width={100} />
+        <img src={logo} height={150} width={130} />
         <div
           style={{
             display: "flex",
@@ -126,7 +126,7 @@ const QA = () => {
           {currentQuestion && (
             <>
               <div className="" style={{ marginBottom: "50px" }}>
-                <h2 style={{ fontSize: "25px" }} className="text-dark">
+                <h2 style={{ fontSize: "20px" }} className="text-white">
                   {currentQuestion.question}
                 </h2>
               </div>

@@ -75,7 +75,7 @@ const Payment = () => {
             </div>
             <button
               onClick={handlePayment}
-              style={{ backgroundColor: "brown", color: "white" }}
+              style={{ backgroundColor: "#FF6005", color: "white" }}
               className="btn  btn-lg px-5 mt-5"
               type="submit"
               disabled={loading} // Disable button while loading

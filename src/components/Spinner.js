@@ -109,7 +109,7 @@ function Spinner() {
   return (
     <div className="App1" style={{ overflow: "hidden" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} height={120} width={130} alt="Logo" />
+        <img src={logo} height={150} width={160} alt="Logo" />
       </div>
 
       <div className="wheel-container ">

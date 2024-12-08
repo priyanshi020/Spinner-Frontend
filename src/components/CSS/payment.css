@@ -9,17 +9,20 @@
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
     }
     .Apps {
-        min-height: 100vh; /* Ensure the height covers the viewport */
-        background-image: url("../../Images/base.jpg");
-        background-size: cover; /* Ensures the image covers the entire background */
-        background-repeat: no-repeat; /* Prevents the image from repeating */
-        background-position: center center;
-        color: #ffffff;
-        text-align: center;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box; /* Includes padding in width and height */
+      height: 100vh; /* Ensure the height covers the viewport */
+      width:100vw;
+      background-image: url("../../Images/spnnerBg.jpg");
+      background-size: cover; /* Ensures the image covers the entire background */
+      background-repeat: no-repeat; /* Prevents the image from repeating */
+      background-position: center center;
+      background-color: #FF6005;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box; /* Includes padding in width and height */
+      overflow: hidden;
       }
