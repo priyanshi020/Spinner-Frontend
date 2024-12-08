@@ -1,213 +1,152 @@
-/* @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .wheel {
-    background: url('../../Images/spinImage.png') no-repeat center;
-    animation: spin 3s ease-in-out infinite;
-  }
-   */
-   /* :root {
-    --spin-deg: 0deg;
-  }
-  
-  .spinner-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-  }
-  
-  .spinner {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: #fff;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transform: rotate(var(--spin-deg));
-    transition: transform 3s cubic-bezier(0.33, 1, 0.68, 1);
-  }
-  
-  .spinner-segment {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    background: #f5f5f5;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transform-origin: 100% 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .spinner-segment span {
-    transform: rotate(-45deg); 
-  }
-  
-  .spinner-segment:nth-child(odd) {
-    background: #ffd700;
-  }
-  
-  .spinner-segment:nth-child(even) {
-    background: #ffa07a;
-  }
-  
-  .spin-button {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 1rem;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  }
-  
-  .spin-button:disabled {
-    background: #999;
-    cursor: not-allowed;
-  }
-  
-  .prize-display {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-   */
-   * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    background: #eaeaea;
-    color: #fff;
-    font-size: 18px;
-    font-family: "Exo 2", sans-serif;
-  }
-  
-  #wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  #wheel {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid #34495e;
-  }
-  
-  #inner-wheel {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transform-origin: center;
-    transition: transform 3s ease-out;
-  }
-  
-  .sec {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    background: #34495e;
-    transform-origin: 100% 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-  }
-  
-  .sec:nth-child(1) {
-    background: #e74c3c;
-    transform: rotate(30deg);
-  }
-  
-  .sec:nth-child(2) {
-    background: #f1c40f;
-    transform: rotate(75deg);
-  }
-  
-  .sec:nth-child(3) {
-    background: #2ecc71;
-    transform: rotate(120deg);
-  }
-  
-  .sec:nth-child(4) {
-    background: #3498db;
-    transform: rotate(165deg);
-  }
-  
-  .sec:nth-child(5) {
-    background: #9b59b6;
-    transform: rotate(210deg);
-  }
-  
-  .sec:nth-child(6) {
-    background: #e67e22;
-    transform: rotate(255deg);
-  }
-  .sec:nth-child(7) {
-    background: red;
-    transform: rotate(300deg);
-  }
-  .sec:nth-child(8) {
-    background: #e67e22;
-    transform: rotate(345deg);
-  }
-  
-  #spin {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #spin:hover {
-    background: #f1c40f;
-  }
-  
-  #shine {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-  }
-  .prize-text {
-    margin-left:83px;
-    font-size: 12px;
-    color: #fff;
-    text-align: center;
-    transform: rotate(47.5deg); /* Counteract section rotation */
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #eaeaea;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Exo 2", sans-serif;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#wheel {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden; /* Ensures segments stay inside the wheel */
+  border: 5px solid #34495e; /* Spinner's black border */
+}
+
+#inner-wheel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-origin: center;
+  transition: transform 3s ease-out;
+}
+
+.sec {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: #34495e;
+  transform-origin: 100% 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sec:nth-child(1) {
+  background: #e74c3c;
+  transform: rotate(0deg);
+}
+
+.sec:nth-child(2) {
+  background: #f1c40f;
+  transform: rotate(45deg);
+}
+
+.sec:nth-child(3) {
+  background: #2ecc71;
+  transform: rotate(90deg);
+}
+
+.sec:nth-child(4) {
+  background: #3498db;
+  transform: rotate(135deg);
+}
+
+.sec:nth-child(5) {
+  background: #9b59b6;
+  transform: rotate(180deg);
+}
+
+.sec:nth-child(6) {
+  background: #e67e22;
+  transform: rotate(225deg);
+}
+
+.sec:nth-child(7) {
+  background: red;
+  transform: rotate(270deg);
+}
+
+.sec:nth-child(8) {
+  background: #e67e22;
+  transform: rotate(315deg);
+}
+
+.prize-text {
+  margin-left: 83px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  transform: rotate(50deg); /* Ensure text faces outward */
+}
+
+#spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: url('../../Images/base.jpg') no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5; /* Spinner stays below the pin */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#spin:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Pin Positioning - Outside the Wheel's Overflow */
+#pin {
+  position: absolute;
+  top: -20px; /* Pin positioned outside the wheel */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 40px;
+  background: #f39c12;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 20; /* Pin stays above the wheel */
+  border: 2px solid #d35400; /* Optional: Add a border for better visibility */
+}
+
+#shine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+}
+
+#txt {
+  margin-top: 20px;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}

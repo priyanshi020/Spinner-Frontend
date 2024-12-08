@@ -148,14 +148,17 @@
 // };
 
 // export default CustomWheel;
-
 import React, { useState, useRef } from "react";
 import "./CSS/wheel.css"; // Import the CSS file for styling
 
 const CustomWheel = () => {
   const [clicks, setClicks] = useState(0);
+  const [prize, setPrize] = useState(null);
   const wheelRef = useRef(null);
-  const prizes = ["Prize 1", "Prize 2", "Prize 3", "Prize 4", "Prize 5", "Prize 6", "Prize 7", "Prize 8"];
+  const prizes = [
+    "Prize 1", "Prize 2", "Prize 3", "Prize 4",
+    "Prize 5", "Prize 6", "Prize 7", "Prize 8"
+  ];
 
   const handleSpinClick = () => {
     const degree = 1800; // Base degree (5 full rotations)
@@ -166,6 +169,10 @@ const CustomWheel = () => {
 
     setClicks(newClicks);
 
+    // Calculate the prize index
+    const prizeIndex = Math.floor((totalDegree % 360) / 45);
+    setPrize(prizes[prizeIndex]);
+
     // Rotate the wheel
     if (wheelRef.current) {
       wheelRef.current.style.transform = `rotate(${totalDegree}deg)`;
@@ -175,45 +182,20 @@ const CustomWheel = () => {
   return (
     <div id="wrapper">
       <div id="wheel">
-        {/* <div id="inner-wheel" ref={wheelRef}>
-          <div className="sec">
-            <span className="fa fa-bell-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-comment-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-smile-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-heart-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-star-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-lightbulb-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-lightbulb-o"></span>
-          </div>
-          <div className="sec">
-            <span className="fa fa-lightbulb-o"></span>
-          </div>
-        </div> */}
         <div id="inner-wheel" ref={wheelRef}>
-            {prizes.map((prize, index) => (
-              <div className="sec" key={index} style={{ transform: `rotate(${index * 45}deg)` }}>
-                <span className="prize-text">{prize}</span>
-              </div>
-            ))}
-          </div>
+          {prizes.map((prize, index) => (
+            <div className="sec" key={index} style={{ transform: `rotate(${index * 45}deg)` }}>
+              <span className="prize-text">{prize}</span>
+            </div>
+          ))}
+        </div>
+        <div id="pin"></div> {/* Add pin to indicate stop */}
         <div id="spin" onClick={handleSpinClick}>
           <div id="inner-spin"></div>
         </div>
         <div id="shine"></div>
       </div>
-      <div id="txt">Click the spin button!</div>
+      <div id="txt">{prize ? `You won: ${prize}` : "Click the spin button!"}</div>
     </div>
   );
 };
