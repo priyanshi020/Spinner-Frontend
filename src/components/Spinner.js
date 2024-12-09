@@ -109,36 +109,38 @@ function Spinner() {
   return (
     <div className="App1" style={{ overflow: "hidden" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} height={150} width={160} alt="Logo" />
+        <img src={logo} alt="Logo" />
       </div>
 
-      <div className="wheel-container ">
-        <Wheel
-          mustStartSpinning={mustSpin}
-          prizeNumber={prizeNumber}
-          data={segments}
-          backgroundColors={segColors}
-          textColors={["#EDD871"]}
-          onStopSpinning={() => onFinished(segments[prizeNumber].option)}
-          outerBorderColor="#EDD871"
-          outerBorderWidth={18}
-          innerRadius={20}
-          innerBorderColor="white"
-          radiusLineWidth={8}
-          radiusLineColor="white"
-          fontFamily="Arial"
-        />
+      <div className="wheel-container">
+  <Wheel
+    mustStartSpinning={mustSpin}
+    prizeNumber={prizeNumber}
+    data={segments}
+    backgroundColors={segColors}
+    textColors={["#EDD871"]}
+    onStopSpinning={() => onFinished(segments[prizeNumber].option)}
+    outerBorderColor="#EDD871"
+    outerBorderWidth={18}
+    innerRadius={20}
+    innerBorderColor="white"
+    radiusLineWidth={8}
+    radiusLineColor="white"
+    fontFamily="Arial"
+  />
 
-        <button
-          className="spin-button"
-          onClick={handleSpinClick}
-          disabled={mustSpin}
-        >
-          Spin
-        </button>
-      </div>
+  {/* Custom Pin */}
+  <div className="custom-pin"></div>
 
-      <Modal
+  <button
+    className="spin-button"
+    onClick={handleSpinClick}
+    disabled={mustSpin}
+  >
+    Spin
+  </button>
+</div>
+   <Modal
         isOpen={showModal}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={false}

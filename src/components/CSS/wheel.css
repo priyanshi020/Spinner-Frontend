@@ -25,6 +25,7 @@ body {
   border-radius: 50%;
   overflow: hidden; /* Ensures segments stay inside the wheel */
   border: 5px solid #34495e; /* Spinner's black border */
+  z-index:1;
 }
 
 #inner-wheel {
@@ -121,17 +122,19 @@ body {
 /* Pin Positioning - Outside the Wheel's Overflow */
 #pin {
   position: absolute;
-  top: -20px; /* Pin positioned outside the wheel */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 40px;
-  background: #f39c12;
+  top: 231px; /* Move the pin above the wheel */
+  left: 33%;
+  transform: rotate(-33deg);
+  width: 40px;
+  height: 50px;
+  background: url('../../Images/map-pin.png');
+  background-size:cover;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  z-index: 20; /* Pin stays above the wheel */
-  border: 2px solid #d35400; /* Optional: Add a border for better visibility */
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
+  z-index:10; /* Ensure pin stays above the wheel */
+ 
 }
+
 
 #shine {
   position: absolute;

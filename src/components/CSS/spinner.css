@@ -83,3 +83,25 @@
     font-size: 12px;
   }
 }
+/* Hide default pin (if it exists) */
+.wheel-container .wheel-pin {
+  display: none;
+}
+
+/* Custom pin styles */
+.custom-pin {
+  position: absolute;
+  top: 0; /* Adjust position above the wheel */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  background-color: #f39c12; /* Your custom color */
+  border-radius: 5px;
+  z-index: 10; /* Make sure the custom pin is above the wheel */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.react-custom-roulette__pin {
+  display: none;
+}
