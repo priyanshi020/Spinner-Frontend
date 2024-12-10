@@ -11,17 +11,18 @@ import { useNavigate } from "react-router-dom";
 import betterLuckMp4 from "../Images/oops.mp4";
 import image1 from "../Images/tigerji.png";
 import image2 from "../Images/TMT.png";
+import customPin from '../Images/aerow.png'
 const segments = [
   { option: "Better luck" },
-  { option: "Won 70 Rs." },
-  { option: "Won 10 Rs." },
+  { option: "₹ 18/-" },
+  { option: "₹ 10/-" },
   { option: "Better luck" },
-  { option: "Won 30 Rs." },
-  { option: "Won 40 Rs." },
+  { option: "₹ 15/-" },
+  { option: "₹ 20/-" },
   { option: "Better luck" },
-  { option: "Won 20 Rs." },
+  { option: "₹ 12/-" },
 ];
-const segColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6", "#e67e22;"];
+const segColors = ["#99031E", "#033E8A", "#5F1040", "#007F5E", "#99031E", "#033E8A", "#5F1040", "#007F5E"];
 
 Modal.setAppElement("#root");
 
@@ -112,21 +113,39 @@ function Spinner() {
         <img src={logo} alt="Logo" width={200}/>
       </div>
 
-    <div className="wheel-container ">
+      <div className="wheel-container" style={{ position: "relative" }}>
+      {/* Custom Pin Image */}
+      <img
+        src={customPin}
+        alt="Custom Pin"
+        style={{
+          position: "absolute",
+          top: "8px", // Adjust to align with your wheel
+          left: "100%",
+          transform: "rotate(45deg)",
+          width: "50px", // Customize size
+          height: "54px",
+          zIndex: 10, // Keep it above the wheel
+        }}
+      />
+
         <Wheel
           mustStartSpinning={mustSpin}
           prizeNumber={prizeNumber}
           data={segments}
           backgroundColors={segColors}
-          textColors={["#EDD871"]}
+          textColors={["white"]}
           onStopSpinning={() => onFinished(segments[prizeNumber].option)}
-          outerBorderColor="black"
-          outerBorderWidth={12}
+          outerBorderColor="white"
+          outerBorderWidth={20}
           innerRadius={20}
-          innerBorderColor="white"
-          radiusLineWidth={2}
+          innerBorderColor="#FB6909"
+          radiusLineWidth={6}
           radiusLineColor="white"
           fontFamily="Arial"
+          pointerProps={{
+            style: { display: "none" }, // Hides the default pin
+          }}
         />
 
         <button
@@ -134,7 +153,7 @@ function Spinner() {
           onClick={handleSpinClick}
           disabled={mustSpin}
         >
-          Spin
+          SPIN
         </button>
       </div>
    <Modal

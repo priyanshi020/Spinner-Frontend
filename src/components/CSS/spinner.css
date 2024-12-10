@@ -35,11 +35,12 @@
   padding: 30px 25px;
   font-size: 16px;
   font-weight: bold;
-  color: #ffffff;
-  /* background: #EDD871; */
-  background: url('../../Images/base.jpg') no-repeat center center;
+  color: #59113F;
+  border:8px solid #FB6909;
+  background:white;
+  /* background: url('../../Images/base.jpg') no-repeat center center; */
   background-size: cover;
-  border: none;
+  /* border: none; */
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -81,7 +82,7 @@
   }
 
   .spin-button {
-    padding: 25px 27px;
+    padding: 15px 10px;
     font-size: 12px;
   }
 }
@@ -106,6 +107,11 @@
 .wheel-container svg > path:first-of-type {
   display: none; /* Hides the default red pin */
 }
+.wheel-container svg path {
+  fill: transparent; /* Makes the pin invisible */
+  pointer-events: none; /* Ensures no interaction with the pin */
+}
+
 
 
 
