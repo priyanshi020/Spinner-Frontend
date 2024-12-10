@@ -21,7 +21,7 @@ const segments = [
   { option: "Better luck" },
   { option: "Won 20 Rs." },
 ];
-const segColors = ["#CC0005", "#FDF5EB", "#CC0005", "#FDF5EB", "#CC0005", "#FDF5EB"];
+const segColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6", "#e67e22;"];
 
 Modal.setAppElement("#root");
 
@@ -108,38 +108,35 @@ function Spinner() {
 
   return (
     <div className="App1" style={{ overflow: "hidden" }}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} alt="Logo" />
+      <div className="my-3" style={{ display: "flex", justifyContent: "center" }}>
+        <img src={logo} alt="Logo" width={200}/>
       </div>
 
-      <div className="wheel-container">
-  <Wheel
-    mustStartSpinning={mustSpin}
-    prizeNumber={prizeNumber}
-    data={segments}
-    backgroundColors={segColors}
-    textColors={["#EDD871"]}
-    onStopSpinning={() => onFinished(segments[prizeNumber].option)}
-    outerBorderColor="#EDD871"
-    outerBorderWidth={18}
-    innerRadius={20}
-    innerBorderColor="white"
-    radiusLineWidth={8}
-    radiusLineColor="white"
-    fontFamily="Arial"
-  />
+    <div className="wheel-container ">
+        <Wheel
+          mustStartSpinning={mustSpin}
+          prizeNumber={prizeNumber}
+          data={segments}
+          backgroundColors={segColors}
+          textColors={["#EDD871"]}
+          onStopSpinning={() => onFinished(segments[prizeNumber].option)}
+          outerBorderColor="black"
+          outerBorderWidth={12}
+          innerRadius={20}
+          innerBorderColor="white"
+          radiusLineWidth={2}
+          radiusLineColor="white"
+          fontFamily="Arial"
+        />
 
-  {/* Custom Pin */}
-  <div className="custom-pin"></div>
-
-  <button
-    className="spin-button"
-    onClick={handleSpinClick}
-    disabled={mustSpin}
-  >
-    Spin
-  </button>
-</div>
+        <button
+          className="spin-button"
+          onClick={handleSpinClick}
+          disabled={mustSpin}
+        >
+          Spin
+        </button>
+      </div>
    <Modal
         isOpen={showModal}
         onRequestClose={closeModal}

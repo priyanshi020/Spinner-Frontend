@@ -105,7 +105,7 @@ const QA = () => {
   return (
     <>
       <div className="Apps1" style={{ textAlign: "", padding: "20px" }}>
-        <img src={logo} height={150} width={130} />
+        <img src={logo}  width={200} className='my-4' />
         <div
           style={{
             display: "flex",

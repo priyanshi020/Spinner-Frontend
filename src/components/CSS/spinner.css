@@ -36,7 +36,9 @@
   font-size: 16px;
   font-weight: bold;
   color: #ffffff;
-  background: #EDD871;
+  /* background: #EDD871; */
+  background: url('../../Images/base.jpg') no-repeat center center;
+  background-size: cover;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -101,7 +103,9 @@
   z-index: 10; /* Make sure the custom pin is above the wheel */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
-
-.react-custom-roulette__pin {
-  display: none;
+.wheel-container svg > path:first-of-type {
+  display: none; /* Hides the default red pin */
 }
+
+
+
