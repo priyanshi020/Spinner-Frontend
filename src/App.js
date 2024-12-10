@@ -33,8 +33,8 @@ function App() {
           {/* Public Route */}
            <Route path="/" element={<Login onLogin={handleLogin} />} /> 
           <Route path="/wheel" element={<CustomWheel/>}/>
-          // <Route path='/' element={<Spinner/>}/>
-          
+           {/* <Route path='/' element={<Spinner/>}/> */}
+          {/*  */}
           {/* Protected Routes */}
           <Route
             path="/spinner"

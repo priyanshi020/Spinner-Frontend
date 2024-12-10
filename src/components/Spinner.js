@@ -120,11 +120,11 @@ function Spinner() {
         alt="Custom Pin"
         style={{
           position: "absolute",
-          top: "8px", // Adjust to align with your wheel
-          left: "100%",
+          top: "10%", // Adjust to align with your wheel
+          left: "88%",
           transform: "rotate(45deg)",
-          width: "50px", // Customize size
-          height: "54px",
+          width: "35px", // Customize size
+          height: "35px",
           zIndex: 10, // Keep it above the wheel
         }}
       />
@@ -217,8 +217,10 @@ function Spinner() {
           />
         )}
         <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>
-          {result}
-        </h2>
+        {result.toLowerCase().includes("better luck") ? "Better Luck" : `YOU WON ${result}`}
+      </h2>
+
+
         {!result.includes("Better luck") && (
           <button
             onClick={redirectToForm}
