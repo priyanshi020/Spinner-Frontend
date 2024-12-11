@@ -123,8 +123,8 @@ function Spinner() {
           top: "10%", // Adjust to align with your wheel
           left: "88%",
           transform: "rotate(45deg)",
-          width: "35px", // Customize size
-          height: "35px",
+          width: "45px", // Customize size
+          height: "45px",
           zIndex: 10, // Keep it above the wheel
         }}
       />
