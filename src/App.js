@@ -14,8 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CustomWheel from "./components/CustomWheel";
 import GoogleReviewPage from "./components/GoogleReviewPage";
 import FollowPage from "./components/FollowPage";
-import AddBeneficiary from "./components/AddBeneficiary";
-import MakePayout from "./components/MakePayout";
+
 
 // ProtectedRoute Component
 const ProtectedRoute = ({ element, isLoggedIn }) => {
@@ -39,8 +38,7 @@ function App() {
           <Route path="/wheel" element={<CustomWheel/>}/>
           <Route path='/review' element={<GoogleReviewPage/>}/>
           <Route path="/follow" element={<FollowPage/>}/>
-          <Route path='/add' element={<AddBeneficiary/>}/>
-          <Route path='/payout' element={<MakePayout/>}/>
+         
            {/* <Route path='/' element={<Spinner/>}/> */}
           {/*  */}
           {/* Protected Routes */}

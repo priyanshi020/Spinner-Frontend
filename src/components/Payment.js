@@ -5,24 +5,47 @@ import "./CSS/payment.css";
 
 const Payment = () => {
   const [name, setName] = useState("");
-  const [upiId, setUpiId] = useState("success@razorpay");
+  const [upiId, setUpiId] = useState("");
   const [loading, setLoading] = useState(false); // State for loading
   const prize = localStorage.getItem("prizeAmount");
   const username = localStorage.getItem("userName");
   const mobileNumber = localStorage.getItem("mobileNumber");
+  const generateBeneficiaryId = (email) =>
+    `bene_${email.split("@")[0]}_${Date.now()}`;
+  const generateTransferId = () => `txn_${Date.now()}`;
 
   const handlePayment = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.post(`${API_URL}payouts/send`, {
-        name: username,
-        contactNumber: mobileNumber,
-        email: name,
-        amount: prize,
-        upiId: upiId,
+      await axios.post(`${API_URL}api/addBeneficiary`, {
+        beneId:generateBeneficiaryId(name),
+        name:username,
+        email:name,
+        phone:mobileNumber,
+        vpa:upiId,
       });
 
-      if (data?.status === 200) {
+      const transferResponse = await axios.post(
+        `${API_URL}api/initiateTransfer`,
+        {
+          beneId: generateBeneficiaryId(name),
+          transferId: generateTransferId(),
+          amount: prize,
+          transferMode: "UPI",
+          remarks: "Test",
+        }
+      );
+      alert("Transfer Successful");
+      console.log("Transfer Response:", transferResponse.data);
+      // const { data } = await axios.post(`${API_URL}payouts/send`, {
+      //   name: username,
+      //   contactNumber: mobileNumber,
+      //   email: name,
+      //   amount: prize,
+      //   upiId: upiId,
+      // });
+
+      if (transferResponse?.status === 200) {
         alert("Payment successful!");
       } else {
         alert("Some error occurred");
