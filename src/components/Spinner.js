@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
 import Modal from "react-modal";
 import "./CSS/spinner.css";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import betterLuckMp4 from "../Images/oops.mp4";
 import image1 from "../Images/tigerji.png";
 import image2 from "../Images/TMT.png";
-import customPin from '../Images/aerow.png'
+import customPin from "../Images/aerow.png";
 const segments = [
   { option: "Better luck" },
   { option: "₹ 18/-" },
@@ -22,7 +22,16 @@ const segments = [
   { option: "Better luck" },
   { option: "₹ 12/-" },
 ];
-const segColors = ["#99031E", "#033E8A", "#5F1040", "#007F5E", "#99031E", "#033E8A", "#5F1040", "#007F5E"];
+const segColors = [
+  "#99031E",
+  "#033E8A",
+  "#5F1040",
+  "#007F5E",
+  "#99031E",
+  "#033E8A",
+  "#5F1040",
+  "#007F5E",
+];
 
 Modal.setAppElement("#root");
 
@@ -106,28 +115,71 @@ function Spinner() {
   const redirectToForm = () => {
     navigate("/Q&A");
   };
+  const [styles, setStyles] = useState({
+    top: "10%",
+    left: "88%",
+  });
+
+  useEffect(() => {
+    const updateStyles = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth <= 400) {
+        setStyles({
+          top: "20%",
+          left: "100%",
+        });
+      } else if (screenWidth >= 400 && screenWidth <= 480) {
+        // Small mobile screens
+        setStyles({
+          top: "20%",
+          left: "100%",
+        });
+      } else if (screenWidth >= 480 && screenWidth <= 768) {
+        // Medium mobile screens
+        setStyles({
+          top: "20%",
+          left: "100%",
+        });
+      } else {
+        // Default for larger screens
+        setStyles({
+          top: "10%",
+          left: "88%",
+        });
+      }
+    };
+
+    // Initial call and event listener
+    updateStyles();
+    window.addEventListener("resize", updateStyles);
+
+    return () => window.removeEventListener("resize", updateStyles); // Cleanup
+  }, []);
 
   return (
     <div className="App1" style={{ overflow: "hidden" }}>
-      <div className="my-3" style={{ display: "flex", justifyContent: "center" }}>
-        <img src={logo} alt="Logo" width={200}/>
+      <div
+        className="my-3"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <img src={logo} alt="Logo" width={200} />
       </div>
 
       <div className="wheel-container" style={{ position: "relative" }}>
-      {/* Custom Pin Image */}
-      <img
-        src={customPin}
-        alt="Custom Pin"
-        style={{
-          position: "absolute",
-          top: "10%", // Adjust to align with your wheel
-          left: "88%",
-          transform: "rotate(45deg)",
-          width: "45px", // Customize size
-          height: "45px",
-          zIndex: 10, // Keep it above the wheel
-        }}
-      />
+        {/* Custom Pin Image */}
+        <img
+          src={customPin}
+          alt="Custom Pin"
+          style={{
+            position: "absolute",
+            top: styles.top,
+            left: styles.left,
+            transform: "rotate(45deg)",
+            width: "45px",
+            height: "45px",
+            zIndex: 10,
+          }}
+        />
 
         <Wheel
           mustStartSpinning={mustSpin}
@@ -156,7 +208,7 @@ function Spinner() {
           SPIN
         </button>
       </div>
-   <Modal
+      <Modal
         isOpen={showModal}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={false}
@@ -217,9 +269,10 @@ function Spinner() {
           />
         )}
         <h2 style={{ marginTop: "20px", fontSize: "24px", color: "#333" }}>
-        {result.toLowerCase().includes("better luck") ? "Better Luck" : `YOU WON ${result}`}
-      </h2>
-
+          {result.toLowerCase().includes("better luck")
+            ? "Better Luck"
+            : `YOU WON ${result}`}
+        </h2>
 
         {!result.includes("Better luck") && (
           <button
