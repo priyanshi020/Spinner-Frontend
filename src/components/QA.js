@@ -4,69 +4,63 @@ import logo from "../Images/tufcon-logo.png";
 import { useNavigate } from "react-router-dom";
 import "./CSS/QA.css";
 const QA = () => {
-  const questionsData = [
+    const questionsData = [
     {
-      question: "What is the capital of France?",
-      options: ["Berlin", "Madrid", "Paris", "Rome"],
-      correctAnswer: "Paris",
-    },
-    {
-      question: "Who wrote 'Hamlet'?",
+      question: "TMT \u0938\u094d\u091f\u0940\u0932 \u0915\u093e \u092a\u0942\u0930\u093e \u0928\u093e\u092e \u0915\u094d\u092f\u093e \u0939\u0948?",
       options: [
-        "William Shakespeare",
-        "Charles Dickens",
-        "Mark Twain",
-        "Leo Tolstoy",
+        "\u091f\u0947\u092e\u094d\u092a\u0930\u094d\u0921 \u092e\u0947\u091f\u0932 \u091f\u093e\u0907\u091f\u0928\u093f\u092f\u092e",
+        "\u0925\u092e\u094d\u0921\u0932 \u092e\u0947\u091f\u0932 \u091f\u0948\u0915\u094d\u0928\u094b\u0932\u094b\u091c\u0940",
+        "\u0925\u092e\u094b-\u092e\u0948\u0915\u0947\u0928\u093f\u0915\u0932 \u091f\u094d\u0930\u0940\u091f\u0947\u0921",
+        "\u091f\u093e\u092f\u091f\u0947\u0928\u093f\u092f\u092e \u092e\u0948\u091f\u0940\u0930\u093f\u092f\u0932 \u091f\u0947\u0938\u094d\u091f",
       ],
-      correctAnswer: "William Shakespeare",
+      correctAnswer: "\u0925\u092e\u094b-\u092e\u0948\u0915\u0947\u0928\u093f\u0915\u0932 \u091f\u094d\u0930\u0940\u091f\u0947\u0921",
     },
     {
-      question: "What is the largest planet in our solar system?",
-      options: ["Earth", "Mars", "Jupiter", "Saturn"],
-      correctAnswer: "Jupiter",
+      question: "TUFCON \u0915\u093e Corporate Office \u0915\u0939\u093e \u0939\u0948?",
+      options: ["\u0926\u093f\u0932\u094d\u0932\u0940", "\u0915\u094b\u0932\u0915\u093e\u0924\u093e", "\u0917\u093f\u0930\u0940\u0927", "\u092a\u091f\u0928\u093e"],
+      correctAnswer: "\u0917\u093f\u0930\u0940\u0927",
     },
     {
-      question: "Which element has the chemical symbol O?",
-      options: ["Oxygen", "Gold", "Silver", "Iron"],
-      correctAnswer: "Oxygen",
+      question: "TUFCON TMT \u0938\u094d\u091f\u0940\u0932 \u0915\u094b \u0917\u092e\u0932 \u0915\u0930\u0928\u0947 \u0915\u0940 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u094b \u0915\u094d\u092f\u093e \u0915\u0939\u0924\u0947 \u0939\u0948?",
+      options: ["\u090f\u0938\u0940\u0902\u0915\u094d\u091f\u093f\u0902\u0917", "\u0915\u094d\u0935\u0947\u0902\u091a\u093f\u0902\u0917", "\u092e\u094b\u0932\u094d\u0921\u093f\u0902\u0917", "\u092b\u094d\u092f\u0942\u091a\u093f\u0902\u0917"],
+      correctAnswer: "\u0915\u094d\u0935\u0947\u0902\u091a \u0917\u0902",
     },
     {
-      question: "What is the square root of 64?",
-      options: ["6", "7", "8", "9"],
-      correctAnswer: "8",
+      question: "TUFCON TMT \u0938\u094d\u091f\u0940\u0932 \u092e\u0947\u0902 \u0928\u093f\u092e\u094d\u0928 \u092a\u094d\u0930\u0915\u093e\u0930 \u0915\u0947 \u0930\u094b\u0927\u0915 \u092a\u0926\u093e\u0930\u094d\u0925 \u0915\u094d\u092f\u093e \u0939\u094b\u0924\u0947 \u0939\u0948\u0902?",
+      options: ["\u0905\u0932\u094b\u092f \u0924\u0924\u094d\u0935", "\u0915\u093e\u0930\u094d\u0921\u093e\u0928", "\u091a\u093f\u0932\u094d\u0932\u093f\u0915\u093e", "\u091f\u093e\u0907\u091f\u0947\u0928\u093f\u092f\u092e"],
+      correctAnswer: "\u0905\u0932\u094b\u092f \u0924\u0924\u094d\u0935",
     },
     {
-      question: "Which is the smallest prime number?",
-      options: ["1", "2", "3", "5"],
-      correctAnswer: "2",
-    },
-    {
-      question: "Who painted the Mona Lisa?",
+      question: "TUFCON TMT \u0938\u094d\u091f\u0940\u0932 \u0915\u0940 \u092e\u091c\u092c\u0942\u0924 \u0935\u093f\u0936\u0947\u0937\u0924\u093e \u0915\u094c\u0928 \u0938\u0940 \u0939\u0948?",
       options: [
-        "Leonardo da Vinci",
-        "Vincent van Gogh",
-        "Pablo Picasso",
-        "Claude Monet",
+        "\u0909\u091a\u094d\u091a \u0932\u0940\u0932\u093e\u092a\u0928",
+        "\u0909\u091a\u094d\u091a \u0927\u093e\u0924\u0941\u0918\u0924\u093e",
+        "\u0909\u091a\u094d\u091a \u0924\u0928\u094d\u092f\u0924\u093e \u0936\u0915\u094d\u0924\u093f",
+        "\u0909\u091a\u094d\u091a \u0924\u093e\u092a\u092e\u093e\u0928 \u0938\u0939\u093f\u0936\u0940\u0932\u0924\u093e",
       ],
-      correctAnswer: "Leonardo da Vinci",
+      correctAnswer: "\u0909\u091a\u094d\u091a \u0924\u0928\u094d\u092f\u0924\u093e \u0936\u0915\u094d\u0924\u093f",
     },
     {
-      question: "Which gas is most abundant in Earth's atmosphere?",
-      options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
-      correctAnswer: "Nitrogen",
+      question: "TUFCON TMT \u0938\u094d\u091f\u0940\u0932 \u0915\u0940 \u0917\u0930\u094d\u092e \u0919\u0932\u0940 \u0915\u0940 \u0917\u092e\u094d\u0932 \u0915\u0940 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u094b \u0915\u094d\u092f\u093e \u0915\u0939\u0924\u0947 \u0915\u094b \u0915\u094d\u092f\u093e \u0915\u093e\u0930\u094d\u0921\u093e\u0928",
+      options: [
+        "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u093e \u091a\u0947\u0936",
+        "\u091a\u093f\u0932\u094d\u0932\u093f\u0915\u093e \u0915\u0940 \u091a\u0947\u0936",
+        "\u091f\u093e\u092a\u092e \u0915\u0947 \u091a\u0947\u0936",
+        "\u091a\u093f\u0932\u094d\u0932\u093f\u0915\u093e \u0915\u0947 \u091a\u0947\u0936",
+      ],
+      correctAnswer: "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u0940 \u091a\u0947\u0936",
     },
     {
-      question: "How many continents are there?",
-      options: ["5", "6", "7", "8"],
-      correctAnswer: "7",
-    },
-    {
-      question: "What is the boiling point of water in Celsius?",
-      options: ["90°C", "100°C", "110°C", "120°C"],
-      correctAnswer: "100°C",
+      question: "TUFCON TMT \u0915\u093e \u0928\u093f\u092e\u093e\u091c \u0915\u0940 \u0915\u094b \u0915\u094d\u092f\u093e \u0915\u0947 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u0940 \u0915\u0947 \u0915\u093e \u0915\u0940 \u0915\u093e\u0928 \u0928\u0935\u093f \u0915\u0947 \u091a\u0947\u0936",
+      options: [
+        "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u0940 \u091a\u0947\u0936",
+        "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u0947 \u091a\u0947\u0936",
+        "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u0947 \u091a\u0947\u0936",
+        "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u0940 \u091a\u0947\u0936",
+      ],
+      correctAnswer: "\u0915\u093e\u0930\u094d\u0921\u093e\u0928 \u0915\u0940 \u091a\u0947\u0936",
     },
   ];
-
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showModal, setShowModal] = useState(false);
