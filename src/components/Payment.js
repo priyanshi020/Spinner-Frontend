@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../service";
 import "./CSS/payment.css";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
   const [name, setName] = useState("");
   const [upiId, setUpiId] = useState("");
   const [loading, setLoading] = useState(false); // State for loading
+  const navigate=useNavigate()
   const prize = localStorage.getItem("prizeAmount");
   const username = localStorage.getItem("userName");
   const mobileNumber = localStorage.getItem("mobileNumber");
@@ -16,23 +18,32 @@ const Payment = () => {
 
   const handlePayment = async () => {
     setLoading(true);
+    const beneId = generateBeneficiaryId(name)
     try {
-      await axios.post(`${API_URL}api/addBeneficiary`, {
-        beneId:generateBeneficiaryId(name),
-        name:username,
+      await axios.post(`${API_URL}cashfree/add-beneficiary`, {
+        beneficiary_id:beneId,
+        beneficiary_name:username,
         email:name,
-        phone:mobileNumber,
+        beneficiary_contact_details:{
+          beneficiary_phone:mobileNumber
+        },
         vpa:upiId,
       });
 
       const transferResponse = await axios.post(
-        `${API_URL}api/initiateTransfer`,
+        `${API_URL}cashfree/make-payout`,
         {
-          beneId: generateBeneficiaryId(name),
-          transferId: generateTransferId(),
-          amount: prize,
-          transferMode: "UPI",
-          remarks: "Test",
+          beneficiary_details:{
+            beneficiary_id:beneId,
+            beneficiary_name:username,
+            email:name,
+            phone:mobileNumber,
+            vpa:upiId
+          },
+          transfer_id: generateTransferId(),
+          transfer_amount: prize,
+          transfer_mode: "upi",
+          transfer_remarks: "Test",
         }
       );
       alert("Transfer Successful");
@@ -47,6 +58,7 @@ const Payment = () => {
 
       if (transferResponse?.status === 200) {
         alert("Payment successful!");
+        navigate('/')
       } else {
         alert("Some error occurred");
       }
