@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Payment = () => {
   const [name, setName] = useState("");
   const [upiId, setUpiId] = useState("");
-  const [loading, setLoading] = useState(false); // State for loading
+  const [loading, setLoading] = useState(false); 
   const navigate=useNavigate()
   const prize = localStorage.getItem("prizeAmount");
   const username = localStorage.getItem("userName");

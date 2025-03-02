@@ -12,6 +12,7 @@ import betterLuckMp4 from "../Images/oops.mp4";
 import image1 from "../Images/tigerji.png";
 import image2 from "../Images/TMT.png";
 import customPin from "../Images/aerow.png";
+import { API_URL } from "../service";
 const segments = [
   { option: "Better luck" },
   { option: "₹ 18/-" },
@@ -70,43 +71,47 @@ function Spinner() {
 
   const [hasSpun, setHasSpun] = useState(false);
 
-  const handleSpinClick = () => {
+  const handleSpinClick = async () => {
     if (hasSpun) {
-      alert("You can only spin once.");
-      navigate("/");
-      return;
+        alert("You can only spin once.");
+        navigate("/");
+        return;
     }
 
-    const newPrizeNumber = Math.floor(Math.random() * segments.length);
+    try {
+        const response = await fetch(`${API_URL}api/spin`, { method: "POST" });
+        const data = await response.json();
+        const resultText = data.result || "Better luck"; // Default to Better Luck if API fails
 
-    // Update states
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
+        const newPrizeNumber = segments.findIndex((segment) => segment.option === resultText);
+        setPrizeNumber(newPrizeNumber !== -1 ? newPrizeNumber : 0);
+        setMustSpin(true);
+        setResult("");
 
-    if (spinSound.current) {
-      spinSound.current.play();
+        if (spinSound.current) spinSound.current.play();
+        setHasSpun(true);
+    } catch (error) {
+        console.error("Error fetching spin result:", error);
+        alert("Something went wrong. Try again later.");
     }
+};
 
-    setResult("");
-    setShowModal(false);
-
-    setHasSpun(true);
-  };
-
-  const onFinished = (winner) => {
+const onFinished = () => {
+    const winner = segments[prizeNumber].option;
     setResult(winner);
     setShowModal(true);
     setMustSpin(false);
 
     if (winner.includes("Better luck")) {
-      localStorage.setItem("hasSpun", "true");
-      console.log("Better luck, spin disabled.");
+        localStorage.setItem("hasSpun", "true");
+        console.log("Better luck, spin disabled.");
     } else {
-      const prizeAmount = winner.match(/\d+/)?.[0] || "0";
-      localStorage.setItem("prizeAmount", prizeAmount);
-      console.log(`Prize saved in localStorage: ${prizeAmount}`);
+        const prizeAmount = winner.match(/\d+/)?.[0] || "0";
+        localStorage.setItem("prizeAmount", prizeAmount);
+        console.log(`Prize saved in localStorage: ${prizeAmount}`);
     }
-  };
+};
+
 
   const closeModal = () => {
     setShowModal(false);
