@@ -23,11 +23,13 @@ const Payment = () => {
       await axios.post(`${API_URL}cashfree/add-beneficiary`, {
         beneficiary_id:beneId,
         beneficiary_name:username,
-        email:name,
         beneficiary_contact_details:{
-          beneficiary_phone:mobileNumber
+          beneficiary_phone:mobileNumber,
+          beneficiary_email:name
         },
-        vpa:upiId,
+        beneficiary_instrument_details: {
+          vpa: upiId
+        },
       });
 
       const transferResponse = await axios.post(
@@ -36,10 +38,14 @@ const Payment = () => {
           beneficiary_details:{
             beneficiary_id:beneId,
             beneficiary_name:username,
-            email:name,
-            phone:mobileNumber,
-            vpa:upiId
           },
+          beneficiary_instrument_details: {
+            vpa: upiId
+          },
+          beneficiary_contact_details: {
+            beneficiary_phone: mobileNumber,
+            beneficiary_email: name,
+    }
           transfer_id: generateTransferId(),
           transfer_amount: prize,
           transfer_mode: "upi",
