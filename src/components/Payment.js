@@ -5,73 +5,74 @@ import "./CSS/payment.css";
 import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [upiId, setUpiId] = useState("");
-  const [loading, setLoading] = useState(false); 
-  const navigate=useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const prize = localStorage.getItem("prizeAmount");
   const username = localStorage.getItem("userName");
   const mobileNumber = localStorage.getItem("mobileNumber");
+
   const generateBeneficiaryId = (email) =>
-    `bene_${email.split("@")[0]}_${Date.now()}`;
+    `bene_${email?.split("@")[0] || "user"}_${Date.now()}`;
+
   const generateTransferId = () => `txn_${Date.now()}`;
 
   const handlePayment = async () => {
+    if (!email || !upiId) {
+      alert("Please enter both Email and UPI ID.");
+      return;
+    }
+
     setLoading(true);
-    const beneId = generateBeneficiaryId(name);
+    const beneId = generateBeneficiaryId(email);
+
     try {
-      await axios.post(`${API_URL}cashfree/add-beneficiary`, {
-        beneficiary_id:beneId,
-        beneficiary_name:username,
-        beneficiary_contact_details:{
-          beneficiary_phone:mobileNumber,
-          beneficiary_email:name
+      // Add Beneficiary API Call
+      await axios.post(`${API_URL}beneficiary`, {
+        beneficiary_id: beneId,
+        beneficiary_name: username,
+        beneficiary_contact_details: {
+          beneficiary_phone: mobileNumber,
+          beneficiary_email: email,
         },
         beneficiary_instrument_details: {
-          vpa: upiId
+          vpa: upiId,
         },
       });
 
+      // Make Payout API Call
       const transferResponse = await axios.post(
-        `${API_URL}cashfree/make-payout`,
+        `${API_URL}transfers`,
         {
-          beneficiary_details:{
-            beneficiary_id:beneId,
-            beneficiary_name:username,
-             beneficiary_instrument_details: {
-                  vpa: upiId
-              },
+          transfer_id: generateTransferId(),
+          transfer_amount: parseFloat(prize) || 0, // Ensure it's a valid number
+          transfer_mode: "upi",
+          transfer_remarks: "Test Payment",
+          beneficiary_details: {
+            beneficiary_id: beneId,
+            beneficiary_name: username,
+            beneficiary_instrument_details: {
+              vpa: upiId,
+            },
           },
-         
           beneficiary_contact_details: {
             beneficiary_phone: mobileNumber,
-            beneficiary_email: name,
-    }
-          transfer_id: generateTransferId(),
-          transfer_amount: prize,
-          transfer_mode: "upi",
-          transfer_remarks: "Test",
+            beneficiary_email: email,
+          },
         }
       );
-      alert("Transfer Successful");
-      console.log("Transfer Response:", transferResponse.data);
-      // const { data } = await axios.post(`${API_URL}payouts/send`, {
-      //   name: username,
-      //   contactNumber: mobileNumber,
-      //   email: name,
-      //   amount: prize,
-      //   upiId: upiId,
-      // });
 
       if (transferResponse?.status === 200) {
         alert("Payment successful!");
-        navigate('/')
+        navigate("/");
       } else {
-        alert("Some error occurred");
+        alert("Payment failed. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Payment failed. Please try again.");
+      alert("An error occurred during payment. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -87,7 +88,7 @@ const Payment = () => {
           <div className="mb-md-5 mt-md-4 pb-3">
             <h2 className="fw-bold mb-2 text-uppercase">Payment</h2>
             <p className="text-dark-50 mb-5">
-              Please enter your Email and UPI Id for secure payment
+              Please enter your Email and UPI ID for secure payment.
             </p>
             <div className="form-outline form-white mb-4">
               <label className="form-label" htmlFor="typeEmailX">
@@ -95,32 +96,32 @@ const Payment = () => {
               </label>
               <input
                 type="email"
-                value={name}
+                value={email}
                 placeholder="john@gmail.com"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 id="typeEmailX"
                 className="form-control form-control-lg"
               />
             </div>
             <div className="form-outline form-white mb-4">
-              <label className="form-label" htmlFor="typePasswordX">
-                UPI Id
+              <label className="form-label" htmlFor="typeUpiX">
+                UPI ID
               </label>
               <input
                 type="text"
                 value={upiId}
                 placeholder="john@upi.com"
                 onChange={(e) => setUpiId(e.target.value)}
-                id="typePasswordX"
+                id="typeUpiX"
                 className="form-control form-control-lg"
               />
             </div>
             <button
               onClick={handlePayment}
               style={{ backgroundColor: "#FF6005", color: "white" }}
-              className="btn  btn-lg px-5 mt-5"
+              className="btn btn-lg px-5 mt-5"
               type="submit"
-              disabled={loading} // Disable button while loading
+              disabled={loading}
             >
               {loading ? (
                 <span>
