@@ -30,7 +30,7 @@ const Payment = () => {
 
     try {
       // Add Beneficiary API Call
-      await axios.post(`${API_URL}beneficiary`, {
+      await axios.post(`${PAYOUT_URL}beneficiary`, {
         beneficiary_id: beneId,
         beneficiary_name: username,
         beneficiary_contact_details: {
@@ -44,7 +44,7 @@ const Payment = () => {
 
       // Make Payout API Call
       const transferResponse = await axios.post(
-        `${API_URL}transfers`,
+        `${PAYOUT_URL}transfers`,
         {
           transfer_id: generateTransferId(),
           transfer_amount: parseFloat(prize) || 0, // Ensure it's a valid number
