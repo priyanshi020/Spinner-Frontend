@@ -18,7 +18,7 @@ const Payment = () => {
 
   const handlePayment = async () => {
     setLoading(true);
-    const beneId = generateBeneficiaryId(name)
+    const beneId = generateBeneficiaryId(name);
     try {
       await axios.post(`${API_URL}cashfree/add-beneficiary`, {
         beneficiary_id:beneId,
@@ -38,10 +38,11 @@ const Payment = () => {
           beneficiary_details:{
             beneficiary_id:beneId,
             beneficiary_name:username,
+             beneficiary_instrument_details: {
+                  vpa: upiId
+              },
           },
-          beneficiary_instrument_details: {
-            vpa: upiId
-          },
+         
           beneficiary_contact_details: {
             beneficiary_phone: mobileNumber,
             beneficiary_email: name,
