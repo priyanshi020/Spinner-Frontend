@@ -125,31 +125,31 @@ const onFinished = () => {
     left: "88%",
   });
 
-  useEffect(() => {
+   useEffect(() => {
     const updateStyles = () => {
       const screenWidth = window.innerWidth;
       if (screenWidth <= 400) {
         setStyles({
-          top: "20%",
-          left: "100%",
+          top: "0vh",
+          left: "65%",
         });
       } else if (screenWidth >= 400 && screenWidth <= 480) {
         // Small mobile screens
         setStyles({
-          top: "20%",
-          left: "100%",
+          top: "10%",
+          left: "80%",
         });
       } else if (screenWidth >= 480 && screenWidth <= 768) {
         // Medium mobile screens
         setStyles({
-          top: "20%",
-          left: "100%",
+          top: "10%",
+          left: "80%",
         });
       } else {
         // Default for larger screens
         setStyles({
           top: "10%",
-          left: "88%",
+          left: "55%",
         });
       }
     };
